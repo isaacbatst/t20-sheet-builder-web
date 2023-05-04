@@ -19,24 +19,27 @@ const SheetBuilderForm = () => {
         <Tab>Equipamento</Tab>
       </TabList>
 
-      <TabPanel>
-        <SheetBuilderFormStepAttributesDefinition />
-      </TabPanel>
-      <TabPanel>
-        <SheetBuilderFormStepRaceDefinition />
-      </TabPanel>
-      <TabPanel>
-        <SheetBuilderFormStepRoleDefinition />
-      </TabPanel>
-      <TabPanel>
-        <SheetBuilderFormStepOriginDefinition />
-      </TabPanel>
-      <TabPanel>
-        <SheetBuilderFormStepIntelligenceSkillsTraining />
-      </TabPanel>
-      <TabPanel>
-        <SheetBuilderFormStepEquipmentDefinition />
-      </TabPanel>
+      <section className="container mx-auto">
+        <TabPanel>
+          <SheetBuilderFormStepAttributesDefinition />
+        </TabPanel>
+        <TabPanel>
+          <SheetBuilderFormStepRaceDefinition />
+        </TabPanel>
+        <TabPanel>
+          <SheetBuilderFormStepRoleDefinition />
+        </TabPanel>
+        <TabPanel>
+          <SheetBuilderFormStepOriginDefinition />
+        </TabPanel>
+        <TabPanel>
+          <SheetBuilderFormStepIntelligenceSkillsTraining />
+        </TabPanel>
+        <TabPanel>
+          <SheetBuilderFormStepEquipmentDefinition />
+        </TabPanel>
+      </section>
+
     </Tabs>
   )
 }

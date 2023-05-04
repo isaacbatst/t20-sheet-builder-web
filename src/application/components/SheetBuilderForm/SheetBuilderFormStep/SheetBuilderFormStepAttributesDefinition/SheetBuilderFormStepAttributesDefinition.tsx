@@ -1,9 +1,7 @@
 import AttributeInput from './AttributeInput'
 import { SheetBuilderFormStepAttributesDefinitionProvider } from './SheetBuilderFormStepAttributesDefinitionContext'
 
-type Props = {}
-
-const SheetBuilderFormStepAttributesDefinition = (props: Props) => {
+const SheetBuilderFormStepAttributesDefinition = () => {
 
   return (
     <SheetBuilderFormStepAttributesDefinitionProvider>

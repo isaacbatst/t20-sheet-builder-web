@@ -1,11 +1,8 @@
-import React from 'react'
-import AttributeCheckbox from './AttributeCheckbox'
-import Select from 'react-select'
-import { GeneralPowerName, SkillName, Translator, VersatileChoiceType } from 't20-sheet-builder'
-import { selectStyles } from '@/common/SelectStyles'
-import SheetBuilderForm from '../../SheetBuilderForm'
-import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
 import { Option } from '@/domain/entities/Option'
+import React from 'react'
+import { GeneralPowerName, SkillName, Translator, VersatileChoiceType } from 't20-sheet-builder'
+import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
+import AttributeCheckbox from './AttributeCheckbox'
 
 const skillsOptions = Object.values(SkillName).map(key => ({ 
   value: key, 
@@ -64,6 +61,7 @@ const SheetBuilderFormStepRaceDefinitionHuman = () => {
               options={generalPowerOptions} 
               placeholder="2 - Escolha um poder" 
               onChange={(option) => setSecondVersatileOption(option?.value)}
+              isSearcheable
             />
           )}
           {secondVersatileOptionType === 'skill' && (
@@ -71,6 +69,7 @@ const SheetBuilderFormStepRaceDefinitionHuman = () => {
               options={skillsOptions} 
               placeholder="2 - Escolha uma perícia" 
               onChange={(option) => setSecondVersatileOption(option?.value)}
+              isSearcheable
             />
           )
           }

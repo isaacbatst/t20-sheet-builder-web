@@ -11,8 +11,8 @@ export const selectStyles: StylesConfig  = {
     {
       return {
         ...base,
-        paddingLeft: '36px'
+        paddingLeft: '36px',
       }
     }
-  }
+  },
 }

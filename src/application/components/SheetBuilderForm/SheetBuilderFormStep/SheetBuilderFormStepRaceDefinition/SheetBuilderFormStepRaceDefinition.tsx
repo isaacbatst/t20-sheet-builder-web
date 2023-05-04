@@ -14,7 +14,7 @@ const SheetBuilderFormStepRaceDefinition = () => {
   const [race, setRace] = React.useState<RaceName>()
   const RaceComponent = race ? raceComponents[race] : null
   return (
-    <div className='container mx-auto'>
+    <div>
       <RacesSelect setRace={setRace} />
       {RaceComponent && <RaceComponent />}
     </div>

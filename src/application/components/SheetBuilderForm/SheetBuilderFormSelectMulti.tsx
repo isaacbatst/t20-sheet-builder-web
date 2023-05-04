@@ -8,20 +8,21 @@ type Props<T> = {
   placeholder?: string
   className?: ComponentProps<'div'>['className']
   isSearcheable?: boolean
-  onChange: (option: Option<T> | null) => void
+  onChange: (option: Option<T>[]) => void
 }
 
-const SheetBuilderFormSelect = <T,>(props: Props<T>) => {
+const SheetBuilderFormSelectMulti = <T,>(props: Props<T>) => {
   return (
     <Select 
       options={props.options} 
       styles={selectStyles} 
-      onChange={(newValue) => props.onChange(newValue as Option<T> | null)} 
+      onChange={(newValue) => props.onChange(newValue as Option<T>[])} 
       placeholder={props.placeholder}
       className={props.className}
+      isMulti
       isSearchable={props.isSearcheable ?? false}
     />
   )
 }
 
-export default SheetBuilderFormSelect
+export default SheetBuilderFormSelectMulti

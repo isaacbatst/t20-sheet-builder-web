@@ -1,0 +1,23 @@
+import React from 'react'
+import SheetBuilderFormSelect from '../../../SheetBuilderFormSelect'
+import { SpellCircle, SpellName, Spells, Translator } from 't20-sheet-builder'
+
+const SheetBuilderFormRoleDefinitionArcanistMage = () => {
+  const [spell, setSpell] = React.useState<SpellName>()
+  return (
+    <div>
+      <p>Você recebe uma magia adicional</p>
+      <SheetBuilderFormSelect 
+        options={Object.values(Spells.getAll()).filter(spell => spell.circle === SpellCircle.first).map(({spellName}) => ({
+          value: spellName,
+          label: Translator.getSpellTranslation(spellName)
+        }))}
+        onChange={(option) => setSpell(option?.value)}
+        className='mb-3'
+        placeholder='Escolha uma magia'
+      />
+    </div>
+  )
+}
+
+export default SheetBuilderFormRoleDefinitionArcanistMage

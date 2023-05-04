@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-const SheetBuilderFormStepRaceDefinitionDwarf = (props: Props) => {
+const SheetBuilderFormStepRaceDefinitionDwarf = () => {
   return (
     <div>Duro como pedra!</div>
   )
