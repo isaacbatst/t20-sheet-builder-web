@@ -1,10 +1,11 @@
 import React from 'react'
 import AttributeCheckbox from './AttributeCheckbox'
 import Select from 'react-select'
-import { GeneralPowerName, SkillName, Translator } from 't20-sheet-builder'
+import { GeneralPowerName, SkillName, Translator, VersatileChoiceType } from 't20-sheet-builder'
 import { selectStyles } from '@/common/SelectStyles'
-
-type Props = {}
+import SheetBuilderForm from '../../SheetBuilderForm'
+import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
+import { Option } from '@/domain/entities/Option'
 
 const skillsOptions = Object.values(SkillName).map(key => ({ 
   value: key, 
@@ -16,12 +17,20 @@ const generalPowerOptions = Object.values(GeneralPowerName).map(key => ({
   label: Translator.getPowerTranslation(key)
 }))
 
-const SheetBuilderFormStepRaceDefinitionHuman = (props: Props) => {
-  const [secondOptionType, setSecondOptionType] = React.useState<'skill' | 'power'>()
+const secondVersatilOptionTypeOptions: Option<VersatileChoiceType>[] = [
+  {label: 'Poder', value: 'power'},
+  {label: 'Perícia', value: 'skill'},
+]
+
+
+const SheetBuilderFormStepRaceDefinitionHuman = () => {
+  const [secondVersatileOptionType, setSecondVersatileOptionType] = React.useState<VersatileChoiceType>()
+  const [firstVersatileOption, setFirstVersatileOption] = React.useState<SkillName>()
+  const [secondVersatileOption, setSecondVersatileOption] = React.useState<GeneralPowerName | SkillName>()
 
   return (
     <div>
-      <div className='mb-5'>
+      <div className='mb-6'>
         <h3 className='mb-3'>+1 em três atributos diferentes</h3>
         <div className='flex flex-row flex-wrap justify-center'>
           <AttributeCheckbox attribute='strength' />
@@ -33,22 +42,36 @@ const SheetBuilderFormStepRaceDefinitionHuman = (props: Props) => {
         </div>
       </div>
       <div>
-        <h3>Versátil</h3>
+        <h3 className='mb-3'>Versátil</h3>
         <div>
-          <p>1 - Primeira opção: perícia</p>
-          <Select options={skillsOptions} styles={selectStyles} />
-          <p>2 - Segunda opção: poder ou perícia</p>
-          <Select 
-            options={[{label: 'Perícia', value: 'skill'}, {label: 'Poder', value: 'power'}]} 
-            styles={selectStyles}
-            onChange={(option) => setSecondOptionType(option.value)}
-            className='mb-3' 
+          <SheetBuilderFormSelect 
+            placeholder='1 - Escolha uma perícia'
+            className='mb-3'
+            options={skillsOptions} 
+            onChange={(option) => setFirstVersatileOption(option?.value)} 
           />
-          {secondOptionType === 'power' && (
-            <Select options={generalPowerOptions} styles={selectStyles} placeholder="Escolha um poder" />
+          <SheetBuilderFormSelect
+            options={secondVersatilOptionTypeOptions} 
+            onChange={(option) => {
+              setSecondVersatileOptionType(option?.value)
+              setSecondVersatileOption(undefined)
+            }}
+            className='mb-3' 
+            placeholder='2 - Escolha perícia ou poder'
+          />
+          {secondVersatileOptionType === 'power' && (
+            <SheetBuilderFormSelect 
+              options={generalPowerOptions} 
+              placeholder="2 - Escolha um poder" 
+              onChange={(option) => setSecondVersatileOption(option?.value)}
+            />
           )}
-          {secondOptionType === 'skill' && (
-            <Select options={skillsOptions} styles={selectStyles} placeholder="Escolha uma perícia" />
+          {secondVersatileOptionType === 'skill' && (
+            <SheetBuilderFormSelect 
+              options={skillsOptions} 
+              placeholder="2 - Escolha uma perícia" 
+              onChange={(option) => setSecondVersatileOption(option?.value)}
+            />
           )
           }
         </div>

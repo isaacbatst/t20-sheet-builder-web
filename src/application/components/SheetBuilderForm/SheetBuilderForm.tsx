@@ -6,9 +6,8 @@ import SheetBuilderFormStepRaceDefinition from "./SheetBuilderFormStep/SheetBuil
 import SheetBuilderFormStepRoleDefinition from "./SheetBuilderFormStep/SheetBuilderFormStepRoleDefinition/SheetBuilderFormStepRoleDefinition"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-type Props = {}
 
-const SheetBuilderForm = (props: Props) => {
+const SheetBuilderForm = () => {
   return (
     <Tabs forceRenderTabPanel>
       <TabList>

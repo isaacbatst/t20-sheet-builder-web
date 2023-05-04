@@ -1,8 +1,6 @@
-import React from 'react'
-import Select from 'react-select'
+import { Option } from '@/domain/entities/Option'
 import { RaceName } from 't20-sheet-builder'
-import {Option} from '@/domain/entities/Option'
-import { selectStyles } from '@/common/SelectStyles'
+import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
 
 type Props = {
   setRace: (race?: RaceName) => void
@@ -21,9 +19,12 @@ const raceOptions: Record<RaceName, Option<RaceName>> = {
 
 const RacesSelect = ({setRace}: Props) => {
   return (
-    <Select options={Object.values(raceOptions)}  className='mb-3'
-      onChange={(e) => setRace(e.value)}
-      styles={selectStyles}/>
+    <SheetBuilderFormSelect 
+      options={Object.values(raceOptions)}  
+      className='mb-3'
+      onChange={(option) => setRace(option?.value)}
+      placeholder='Escolha uma raça'
+    />
   )
 }
 

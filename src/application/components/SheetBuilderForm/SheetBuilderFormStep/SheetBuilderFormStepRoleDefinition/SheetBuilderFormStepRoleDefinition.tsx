@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-const SheetBuilderFormStepRoleDefinition = (props: Props) => {
+const SheetBuilderFormStepRoleDefinition = () => {
   return (
     <div>SheetBuilderFormStepRoleDefinition</div>
   )
