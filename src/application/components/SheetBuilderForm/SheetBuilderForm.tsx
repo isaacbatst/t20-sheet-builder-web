@@ -10,7 +10,7 @@ type Props = {}
 
 const SheetBuilderForm = (props: Props) => {
   return (
-    <Tabs>
+    <Tabs forceRenderTabPanel>
       <TabList>
         <Tab>Atributos</Tab>
         <Tab>Raça</Tab>
@@ -27,10 +27,10 @@ const SheetBuilderForm = (props: Props) => {
         <SheetBuilderFormStepRaceDefinition />
       </TabPanel>
       <TabPanel>
-        <SheetBuilderFormStepOriginDefinition />
+        <SheetBuilderFormStepRoleDefinition />
       </TabPanel>
       <TabPanel>
-        <SheetBuilderFormStepRoleDefinition />
+        <SheetBuilderFormStepOriginDefinition />
       </TabPanel>
       <TabPanel>
         <SheetBuilderFormStepIntelligenceSkillsTraining />
