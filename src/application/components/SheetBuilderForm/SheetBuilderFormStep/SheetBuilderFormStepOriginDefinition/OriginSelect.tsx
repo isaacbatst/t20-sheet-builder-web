@@ -18,6 +18,7 @@ const OriginSelect = (props: Props) => {
       options={originOptions}
       onChange={(option) => props.setOrigin(option?.value)}
       className='mb-3'
+      id='origin-select'
     />
   )
 }

@@ -16,6 +16,7 @@ const SheetBuilderFormRoleDefinitionArcanistInitialSpells = () => {
         onChange={(options) => setSpells(options.map(option => option.value))}
         className='mb-3'
         placeholder='Escolha as magias'
+        id='arcanist-initial-spells-select'
       />
     </div>
   )

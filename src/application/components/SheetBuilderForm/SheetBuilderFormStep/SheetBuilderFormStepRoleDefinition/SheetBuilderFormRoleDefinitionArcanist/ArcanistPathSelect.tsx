@@ -21,6 +21,7 @@ const ArcanistPathSelect = ({setPath}: Props) => {
       onChange={(option) => setPath(option?.value)}
       className='mb-3'
       placeholder='Escolha um caminho'
+      id='arcanist-path-select'
     />
   )
 }

@@ -21,6 +21,7 @@ const SheetBuilderFormStepIntelligenceSkillsTraining = () => {
             isSearcheable
             options={options}
             onChange={(options) => setSelectedSkills(options.map(option => option.value))}
+            id='intelligence-skills-select'
           />
         )
       }

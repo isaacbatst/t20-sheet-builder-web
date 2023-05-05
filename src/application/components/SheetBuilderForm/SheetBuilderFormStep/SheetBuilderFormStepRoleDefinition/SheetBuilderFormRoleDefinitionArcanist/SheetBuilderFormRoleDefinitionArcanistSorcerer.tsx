@@ -25,6 +25,7 @@ const SheetBuilderFormRoleDefinitionArcanistSorcerer = () => {
       onChange={(option) => setLineage(option?.value)}
       className='mb-3'
       placeholder='Escolha uma linhagem'
+      id="arcanist-sorcerer-lineage-select"
     />
   </div>
 }

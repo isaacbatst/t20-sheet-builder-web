@@ -21,6 +21,7 @@ const OriginBenefitsSelect = ({benefits, setBenefits}: Props) => {
         onChange={(options) => setBenefits(options.map(option => option.value))}
         className='mb-3'
         placeholder='Escolha entre perícias e poderes'
+        id='origin-benefits-select'
       />
     </div>
   )

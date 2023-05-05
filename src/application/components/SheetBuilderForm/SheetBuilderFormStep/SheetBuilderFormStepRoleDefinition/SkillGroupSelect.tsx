@@ -23,6 +23,7 @@ const SkillGroupSelect = ({skillGroup}: Props) => {
           onChange={(newValue) => newValue ? setSelectedSkills([newValue.value]) : setSelectedSkills([])} 
           placeholder={`Opções: ${skillGroup.skills.map(skill => Translator.getSkillTranslation(skill)).join(', ')}`}
           isSearcheable
+          id='skill-group-select'
         />) :
         (     
           <SheetBuilderFormSelect
@@ -32,6 +33,7 @@ const SkillGroupSelect = ({skillGroup}: Props) => {
             placeholder={`Opções: ${skillGroup.skills.map(skill => Translator.getSkillTranslation(skill)).join(', ')}`}
             className='mb-3'
             isSearcheable
+            id='skill-group-select'
           />
         )
       }

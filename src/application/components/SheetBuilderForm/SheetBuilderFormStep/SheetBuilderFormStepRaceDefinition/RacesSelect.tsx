@@ -3,7 +3,7 @@ import { RaceName } from 't20-sheet-builder'
 import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
 
 type Props = {
-  setRace: (race?: RaceName) => void
+  changeRace: (race?: RaceName) => void
 }
 
 const raceOptions: Record<RaceName, Option<RaceName>> = {
@@ -17,13 +17,14 @@ const raceOptions: Record<RaceName, Option<RaceName>> = {
   }
 } 
 
-const RacesSelect = ({setRace}: Props) => {
+const RacesSelect = ({changeRace: setRace}: Props) => {
   return (
     <SheetBuilderFormSelect 
       options={Object.values(raceOptions)}  
-      className='mb-3'
+      className='mb-6'
       onChange={(option) => setRace(option?.value)}
       placeholder='Escolha uma raça'
+      id='race-select'
     />
   )
 }

@@ -20,6 +20,7 @@ const RoleSelect = ({setRole}: Props) => {
       className='mb-3'
       onChange={(option) => setRole(option?.value)} 
       placeholder='Escolha uma classe'
+      id='role-select'
     />
   )
 }

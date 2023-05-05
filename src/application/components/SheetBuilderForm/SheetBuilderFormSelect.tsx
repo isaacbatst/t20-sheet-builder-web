@@ -11,6 +11,7 @@ type Props<T, IsMulti extends boolean, V = Value<T, IsMulti>> = {
   className?: ComponentProps<'div'>['className']
   isSearcheable?: boolean
   isMulti?: IsMulti
+  id: string
   onChange: (option: V) => void
 }
 
@@ -25,6 +26,7 @@ const SheetBuilderFormSelect = <T, isMulti extends boolean = false, V extends Va
       className={props.className}
       isSearchable={props.isSearcheable ?? false}
       isMulti={props.isMulti}
+      instanceId={props.id}
     />
   )
 }

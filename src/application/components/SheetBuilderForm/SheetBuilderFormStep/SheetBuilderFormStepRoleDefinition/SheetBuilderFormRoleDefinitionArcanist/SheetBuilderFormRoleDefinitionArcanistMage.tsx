@@ -15,6 +15,7 @@ const SheetBuilderFormRoleDefinitionArcanistMage = () => {
         onChange={(option) => setSpell(option?.value)}
         className='mb-3'
         placeholder='Escolha uma magia'
+        id='arcanist-mage-spell-select'
       />
     </div>
   )

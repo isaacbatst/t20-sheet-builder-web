@@ -19,6 +19,7 @@ const SimpleWeaponSelect = ({setSelected}: Props) => {
         options={simpleWeapons}
         onChange={(option) => setSelected(option?.value)}
         className='mb-3'
+        id='simple-weapon-select'
       />
     </div>
   )

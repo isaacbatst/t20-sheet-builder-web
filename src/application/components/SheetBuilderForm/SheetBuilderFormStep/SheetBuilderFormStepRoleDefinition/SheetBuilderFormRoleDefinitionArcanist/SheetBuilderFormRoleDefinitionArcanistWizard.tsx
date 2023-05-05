@@ -14,6 +14,7 @@ const SheetBuilderFormRoleDefinitionArcanistWizard = () => {
         onChange={(option) => console.log(option)}
         className='mb-3'
         placeholder='Escolha um foco'
+        id='arcanist-wizard-focus-select'
       />
     </div>
   )
