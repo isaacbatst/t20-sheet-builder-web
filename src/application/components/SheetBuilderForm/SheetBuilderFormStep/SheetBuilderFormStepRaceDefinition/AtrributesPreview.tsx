@@ -2,6 +2,7 @@ import { useAppSelector } from '@/application/store/hooks'
 import { selectAttributes } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
 import { useMemo } from 'react'
 import { Attribute, Attributes, Translator } from 't20-sheet-builder'
+import AttributePreviewItem from './AttributePreviewItem'
 
 type Props = {
   attributeModifiers: Partial<Attributes>
@@ -32,16 +33,14 @@ const AtrributesPreview = ({attributeModifiers}: Props) => {
     <div className='mb-6'>
       <h3 className='mb-3'>Atributos</h3>
       <ul className='flex gap-2 justify-center flex-wrap'>
-        {attributesPreview.map(({attribute, modifier, value}) => {
-          const modifierWithSign = modifier && modifier > 0 ? `+${modifier}` : modifier
-          return (
-            <li key={attribute} className='border border-white rounded-2xl px-5 py-1'>
-              {Translator.getAttributeTranslation(attribute as Attribute)}: {value} 
-              {' '}
-              {modifier && <span>({modifierWithSign})</span>}
-            </li>
-          )
-        })}
+        {attributesPreview.map(({attribute, modifier, value}) => 
+          <AttributePreviewItem 
+            key={attribute} 
+            attribute={attribute}
+            value={value}
+            modifier={modifier}
+          />
+        )}
       </ul>
     </div>
   )
