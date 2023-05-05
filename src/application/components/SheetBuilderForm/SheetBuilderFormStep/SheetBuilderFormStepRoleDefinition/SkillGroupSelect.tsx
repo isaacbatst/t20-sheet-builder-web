@@ -1,7 +1,6 @@
 import React from 'react'
 import { SelectSkillGroup, SkillName, Translator } from 't20-sheet-builder'
 import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
-import SheetBuilderFormSelectMulti from '../../SheetBuilderFormSelectMulti'
 
 type Props = {
   skillGroup: SelectSkillGroup
@@ -25,7 +24,8 @@ const SkillGroupSelect = ({skillGroup}: Props) => {
           isSearcheable
         />) :
         (     
-          <SheetBuilderFormSelectMulti 
+          <SheetBuilderFormSelect
+            isMulti
             onChange={(newValues) => setSelectedSkills(newValues.map(option => option.value))}
             options={options}
             placeholder={`Escolha ${skillGroup.amount} perícias`}

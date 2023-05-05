@@ -1,5 +1,5 @@
 import { Translator } from 't20-sheet-builder'
-import SheetBuilderFormSelectMulti from '../../SheetBuilderFormSelectMulti'
+import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
 import { OriginBenefitName } from './SheetBuilderFormStepOriginDefinition'
 
 type Props = {
@@ -15,8 +15,9 @@ const OriginBenefitsSelect = ({benefits, setBenefits}: Props) => {
   return (
     <div>
       <p>Escolha dois benefícios de origem</p>
-      <SheetBuilderFormSelectMulti 
+      <SheetBuilderFormSelect 
         options={options}
+        isMulti
         onChange={(options) => setBenefits(options.map(option => option.value))}
         className='mb-3'
         placeholder='Escolha entre perícias e poderes'

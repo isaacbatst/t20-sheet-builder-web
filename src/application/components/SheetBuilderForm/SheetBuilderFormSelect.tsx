@@ -1,25 +1,30 @@
 import { selectStyles } from '@/common/SelectStyles'
 import { Option } from '@/domain/entities/Option'
 import React, { ComponentProps } from 'react'
-import Select from 'react-select'
+import Select, { MultiValue, SingleValue } from 'react-select'
 
-type Props<T> = {
+type Value<T, IsMulti extends boolean> = IsMulti extends true ? MultiValue<Option<T>> : SingleValue<Option<T>>
+
+type Props<T, IsMulti extends boolean, V = Value<T, IsMulti>> = {
   options: Option<T>[]
   placeholder?: string
   className?: ComponentProps<'div'>['className']
   isSearcheable?: boolean
-  onChange: (option: Option<T> | null) => void
+  isMulti?: IsMulti
+  onChange: (option: V) => void
 }
 
-const SheetBuilderFormSelect = <T,>(props: Props<T>) => {
+const SheetBuilderFormSelect = <T, isMulti extends boolean = false, V extends Value<T, isMulti> = Value<T, isMulti>>
+  (props: Props<T, isMulti>) => {
   return (
     <Select 
       options={props.options} 
       styles={selectStyles} 
-      onChange={(newValue) => props.onChange(newValue as Option<T> | null)} 
+      onChange={(newValue) => props.onChange(newValue as V)} 
       placeholder={props.placeholder}
       className={props.className}
       isSearchable={props.isSearcheable ?? false}
+      isMulti={props.isMulti}
     />
   )
 }
