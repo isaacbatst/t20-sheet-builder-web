@@ -11,12 +11,12 @@ const SheetBuilderForm = () => {
   return (
     <Tabs forceRenderTabPanel>
       <TabList>
-        <Tab>Atributos</Tab>
-        <Tab>Raça</Tab>
-        <Tab>Classe</Tab>
-        <Tab>Origem</Tab>
-        <Tab>Perícias de inteligência</Tab>
-        <Tab>Equipamento</Tab>
+        <Tab>1 - Atributos Iniciais</Tab>
+        <Tab>2 - Raça</Tab>
+        <Tab>3 - Classe</Tab>
+        <Tab>4 - Origem</Tab>
+        <Tab>5 - Perícias de inteligência</Tab>
+        <Tab>6 - Equipamento</Tab>
       </TabList>
 
       <section className="container mx-auto">

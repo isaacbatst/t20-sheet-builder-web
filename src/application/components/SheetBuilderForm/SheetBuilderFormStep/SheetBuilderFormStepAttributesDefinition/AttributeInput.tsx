@@ -1,21 +1,20 @@
-import React from 'react'
+import { useAppDispatch, useAppSelector } from '@/application/store/hooks'
+import { decrementAttribute, incrementAttribute, selectAttribute } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
 import { Attribute, Translator } from 't20-sheet-builder'
-import { useSheetBuilderFormStepAttributesDefinitionContext } from './SheetBuilderFormStepAttributesDefinitionContext'
 
 type Props = {
   attribute: Attribute
 }
 
-
-
 const AttributeInput = ({attribute}: Props) => {
-  const {attributes, decrement, increment} = useSheetBuilderFormStepAttributesDefinitionContext()
+  const dispatch = useAppDispatch();
+  const attributeValue = useAppSelector(selectAttribute(attribute))
   return (
     <div>
       <label>{Translator.getAttributeTranslation(attribute)}</label>
-      <button type="button" onClick={() => increment(attribute)}>+</button>
-      <input disabled type="number" value={attributes[attribute]} className='text-slate-900' />
-      <button type="button" onClick={() => decrement(attribute)}>-</button>
+      <button type="button" onClick={() => dispatch(incrementAttribute(attribute))}>+</button>
+      <input disabled type="number" value={attributeValue} className='text-slate-900' />
+      <button type="button" onClick={() => dispatch(decrementAttribute(attribute))}>-</button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { selectStyles } from '@/common/SelectStyles'
+import { selectStyles } from '@/application/common/SelectStyles'
 import { Option } from '@/domain/entities/Option'
 import React, { ComponentProps } from 'react'
 import Select, { MultiValue, SingleValue } from 'react-select'
