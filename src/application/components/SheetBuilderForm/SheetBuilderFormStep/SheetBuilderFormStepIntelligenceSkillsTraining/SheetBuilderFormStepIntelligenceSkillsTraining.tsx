@@ -2,7 +2,7 @@ import React from 'react'
 import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
 import { SkillName, Translator } from 't20-sheet-builder'
 import { useAppSelector } from '@/application/store/hooks'
-import { selectAttribute, selectAttributes } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
+import { selectAttribute } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceInitialAttributes'
 
 const SheetBuilderFormStepIntelligenceSkillsTraining = () => {
   const intelligence = useAppSelector(selectAttribute('intelligence'))

@@ -4,10 +4,10 @@ import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
 
 type Props = {
   skillGroup: SelectSkillGroup
+  setGroupSelectedSkills: (skills: SkillName[]) => void
 }
 
-const SkillGroupSelect = ({skillGroup}: Props) => {
-  const [selectedSkills, setSelectedSkills] = React.useState<SkillName[]>([])
+const SkillGroupSelect = ({skillGroup, setGroupSelectedSkills: setSelectedSkills}: Props) => {
   const options = skillGroup.skills.map(skill => ({
     value: skill,
     label: Translator.getSkillTranslation(skill)

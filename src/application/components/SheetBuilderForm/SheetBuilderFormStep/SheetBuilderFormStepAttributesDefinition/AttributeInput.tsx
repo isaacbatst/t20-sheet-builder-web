@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/application/store/hooks'
-import { decrementAttribute, incrementAttribute, selectAttribute } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
+import { selectAttribute, incrementAttribute, decrementAttribute } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceInitialAttributes'
 import { Attribute, Translator } from 't20-sheet-builder'
 
 type Props = {

@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import sheetBuilderSlice from './slices/sheetBuilder/sheetBuilderSlice'
+import { sheetBuilderReducer } from './slices/sheetBuilder/sheetBuilderSlice';
 
 const store = configureStore({
   reducer: {
-    sheetBuilder: sheetBuilderSlice.reducer,
+    sheetBuilder: sheetBuilderReducer,
   }
 })
 

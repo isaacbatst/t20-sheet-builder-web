@@ -1,10 +1,11 @@
-import { SheetBuilderStateRaceHumanVersatileChoice, submitRaceHuman } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
 import React, { useCallback } from 'react'
 import { Attribute, Attributes, GeneralPowerName, Human, SkillName, VersatileChoiceFactory, VersatileChoiceType } from 't20-sheet-builder'
 import ConfirmButton from '../../../ConfirmButton'
 import { RaceComponentProps } from '../SheetBuilderFormStepRaceDefinition'
 import SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes from './SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes'
 import SheetBuilderFormStepRaceDefinitionHumanVersatile from './SheetBuilderFormStepRaceDefinitionHumanVersatile'
+import { submitRaceHuman } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRaceDefinition'
+import { SheetBuilderStateRaceHumanVersatileChoice } from '@/application/store/slices/sheetBuilder/types'
 
 export type AttributeCheckboxes = Record<Attribute, boolean>
 

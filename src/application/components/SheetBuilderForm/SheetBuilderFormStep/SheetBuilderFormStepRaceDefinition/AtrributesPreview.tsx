@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/application/store/hooks'
-import { selectAttributes } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
+import { selectAttributes } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceInitialAttributes'
 import { useMemo } from 'react'
-import { Attribute, Attributes, Translator } from 't20-sheet-builder'
+import { Attribute, Attributes } from 't20-sheet-builder'
 import AttributePreviewItem from './AttributePreviewItem'
 
 type Props = {
