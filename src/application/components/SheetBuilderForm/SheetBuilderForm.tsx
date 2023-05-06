@@ -1,3 +1,4 @@
+import SheetBuilderFormAlertError from "./SheetBuilderFormAlertError"
 import SheetBuilderFormStepAttributesDefinition from "./SheetBuilderFormStep/SheetBuilderFormStepAttributesDefinition/SheetBuilderFormStepAttributesDefinition"
 import SheetBuilderFormStepEquipmentDefinition from "./SheetBuilderFormStep/SheetBuilderFormStepEquipmentDefinition/SheetBuilderFormStepEquipmentDefinition"
 import SheetBuilderFormStepIntelligenceSkillsTraining from "./SheetBuilderFormStep/SheetBuilderFormStepIntelligenceSkillsTraining/SheetBuilderFormStepIntelligenceSkillsTraining"
@@ -39,7 +40,6 @@ const SheetBuilderForm = () => {
           <SheetBuilderFormStepEquipmentDefinition />
         </TabPanel>
       </section>
-
     </Tabs>
   )
 }

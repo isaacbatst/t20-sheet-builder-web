@@ -9,11 +9,20 @@ const secondVersatilOptionTypeOptions: Option<VersatileChoiceType>[] = [
   {label: 'Perícia', value: 'skill'},
 ]
 
-const SheetBuilderFormStepRaceDefinitionHumanVersatil = () => {
-  const [secondVersatileOptionType, setSecondVersatileOptionType] = React.useState<VersatileChoiceType>()
-  const [firstVersatileOption, setFirstVersatileOption] = React.useState<SkillName>()
-  const [secondVersatileOption, setSecondVersatileOption] = React.useState<GeneralPowerName | SkillName>()
-  
+type Props = {
+  secondVersatileOptionType?: VersatileChoiceType
+  setFirstVersatileOption(option?: SkillName): void
+  setSecondVersatileOption(option?: SkillName | GeneralPowerName): void
+  setSecondVersatileOptionType(option?: VersatileChoiceType): void
+}
+
+const SheetBuilderFormStepRaceDefinitionHumanVersatile = ({
+  secondVersatileOptionType,  
+  setFirstVersatileOption, 
+  setSecondVersatileOption,
+  setSecondVersatileOptionType
+}: Props) => {
+
   return (
     <div className='mb-6'>
       <h3 className='mb-3'>Versátil</h3>
@@ -59,4 +68,4 @@ const SheetBuilderFormStepRaceDefinitionHumanVersatil = () => {
   )
 }
 
-export default React.memo(SheetBuilderFormStepRaceDefinitionHumanVersatil)
+export default React.memo(SheetBuilderFormStepRaceDefinitionHumanVersatile)

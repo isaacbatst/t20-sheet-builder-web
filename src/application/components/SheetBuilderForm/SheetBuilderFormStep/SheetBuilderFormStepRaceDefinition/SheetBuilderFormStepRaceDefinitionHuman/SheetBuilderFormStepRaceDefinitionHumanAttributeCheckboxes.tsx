@@ -1,37 +1,18 @@
-import React, { useEffect } from 'react'
-import { Attribute, Attributes } from 't20-sheet-builder'
+import { Attribute } from 't20-sheet-builder'
 import AttributeCheckbox from '../AttributeCheckbox'
+import { AttributeCheckboxes } from './SheetBuilderFormStepRaceDefinitionHuman'
 
-type AttributeCheckboxes = Record<Attribute, boolean>
 
 type Props = {
-  setAttributeModifiers: (attributeModifiers: Partial<Attributes>) => void
+  attributeCheckboxes: AttributeCheckboxes
+  toggleAttribute: (attribute: Attribute) => void
 }
 
-const SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes = ({setAttributeModifiers}: Props) => {
-  const [attributeCheckboxes, setAttributeCheckboxes] = React.useState<AttributeCheckboxes>({
-    charisma: false,
-    constitution: false,
-    dexterity: false,
-    intelligence: false,
-    strength: false,
-    wisdom: false 
-  })
-
-  useEffect(() => {
-    const attributeModifiers = Object.entries(attributeCheckboxes)
-      .reduce<Partial<Attributes>>((acc, [attribute, checked]) => {
-        if (checked) {
-          acc[attribute as Attribute] = 1
-        }
-        return acc
-      }, {})
-    setAttributeModifiers(attributeModifiers)
-  }, [attributeCheckboxes, setAttributeModifiers])
-
-  const toggleAttribute = (attribute: Attribute) => {
-    setAttributeCheckboxes((prev) => ({...prev, [attribute]: !prev[attribute]}))
-  }
+const SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes = ({
+  attributeCheckboxes,
+  toggleAttribute,
+}: Props) => {
+  
   
   return (
     <div className=''>
