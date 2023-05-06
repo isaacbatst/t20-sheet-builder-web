@@ -1,9 +1,8 @@
-import { useAppDispatch } from '@/application/store/hooks'
 import { submitRaceDwarf } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
 import React from 'react'
 import { Dwarf } from 't20-sheet-builder'
-import RaceDefinitionConfirmButton from './RaceDefinitionConfirmButton'
-import { RaceComponentProps } from './SheetBuilderFormStepRaceDefinition'
+import ConfirmButton from '../../../ConfirmButton'
+import { RaceComponentProps } from '../SheetBuilderFormStepRaceDefinition'
 
 const SheetBuilderFormStepRaceDefinitionDwarf: React.FC<RaceComponentProps> = ({
   attributesPreview,
@@ -24,7 +23,7 @@ const SheetBuilderFormStepRaceDefinitionDwarf: React.FC<RaceComponentProps> = ({
     <div>
       <p className='mb-6'>Duro como pedra!</p>
       {attributesPreview}
-      <RaceDefinitionConfirmButton confirmRace={confirmDwarf} />
+      <ConfirmButton confirm={confirmDwarf} />
     </div>
   )
 }

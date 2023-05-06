@@ -1,13 +1,13 @@
 import React from 'react'
 
 type Props = {
-  confirmRace(): void
+  confirm(): void
 }
 
-const RaceDefinitionConfirmButton = ({confirmRace}: Props) => {
+const ConfirmButton = ({confirm}: Props) => {
   return (
     <button 
-      onClick={() => confirmRace()}
+      onClick={() => confirm()}
       type='button' className='
           bg-white px-8 py-3 mb-3 rounded-2xl 
           text-slate-900 font-bold 
@@ -19,4 +19,4 @@ const RaceDefinitionConfirmButton = ({confirmRace}: Props) => {
     </button>  )
 }
 
-export default RaceDefinitionConfirmButton
+export default ConfirmButton

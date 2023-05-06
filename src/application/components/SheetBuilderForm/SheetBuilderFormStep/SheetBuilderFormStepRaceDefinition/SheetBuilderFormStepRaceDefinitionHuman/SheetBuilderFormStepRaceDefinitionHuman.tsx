@@ -1,11 +1,10 @@
-import { useAppDispatch } from '@/application/store/hooks'
 import { SheetBuilderStateRaceHumanVersatileChoice, submitRaceHuman } from '@/application/store/slices/sheetBuilder/sheetBuilderSlice'
 import React, { useCallback } from 'react'
 import { Attribute, Attributes, GeneralPowerName, Human, SkillName, VersatileChoiceFactory, VersatileChoiceType } from 't20-sheet-builder'
+import ConfirmButton from '../../../ConfirmButton'
 import { RaceComponentProps } from '../SheetBuilderFormStepRaceDefinition'
 import SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes from './SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes'
 import SheetBuilderFormStepRaceDefinitionHumanVersatile from './SheetBuilderFormStepRaceDefinitionHumanVersatile'
-import RaceDefinitionConfirmButton from '../RaceDefinitionConfirmButton'
 
 export type AttributeCheckboxes = Record<Attribute, boolean>
 
@@ -14,7 +13,6 @@ const SheetBuilderFormStepRaceDefinitionHuman: React.FC<RaceComponentProps> = ({
   setAttributeModifiers,
   confirmRace
 }) => {
-  const dispatch = useAppDispatch()
   const [firstVersatileOption, setFirstVersatileOption] = React.useState<SkillName>()
   const [secondVersatileOption, setSecondVersatileOption] = React.useState<GeneralPowerName | SkillName>()
   const [secondVersatileOptionType, setSecondVersatileOptionType] = React.useState<VersatileChoiceType>()
@@ -84,7 +82,7 @@ const SheetBuilderFormStepRaceDefinitionHuman: React.FC<RaceComponentProps> = ({
         setSecondVersatileOption={setSecondVersatileOption}
         setSecondVersatileOptionType={setSecondVersatileOptionType}
       />
-      <RaceDefinitionConfirmButton confirmRace={() => confirmRace(makeHuman, createSubmitAction)} />
+      <ConfirmButton confirm={() => confirmRace(makeHuman, createSubmitAction)} />
     </div>
   )
 }

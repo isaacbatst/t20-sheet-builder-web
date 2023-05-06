@@ -8,7 +8,7 @@ import SheetBuilderFormAlertError from '../../SheetBuilderFormAlertError'
 import SheetBuilderFormAlertSuccess from '../../SheetBuilderFormAlertSuccess'
 import AtrributesPreview from './AtrributesPreview'
 import RacesSelect from './RacesSelect'
-import SheetBuilderFormStepRaceDefinitionDwarf from './SheetBuilderFormStepRaceDefinitionDwarf'
+import SheetBuilderFormStepRaceDefinitionDwarf from './SheetBuilderFormStepRaceDefinitionDwarf/SheetBuilderFormStepRaceDefinitionDwarf'
 import SheetBuilderFormStepRaceDefinitionHuman from './SheetBuilderFormStepRaceDefinitionHuman/SheetBuilderFormStepRaceDefinitionHuman'
 
 export type RaceComponentProps = {
