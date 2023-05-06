@@ -1,9 +1,9 @@
 import { submitRole } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRoleDefinition'
 import React, { useState } from 'react'
 import { SkillName, Warrior } from 't20-sheet-builder'
-import ConfirmButton from '../../ConfirmButton'
-import { RoleComponentProps } from './SheetBuilderFormStepRoleDefinition'
-import SkillGroupSelect from './SkillGroupSelect'
+import ConfirmButton from '../../../ConfirmButton'
+import { RoleComponentProps } from '../SheetBuilderFormStepRoleDefinition'
+import SkillGroupSelect from '../SkillGroupSelect'
 
 const SheetBuilderFormRoleDefinitionWarrior: React.FC<RoleComponentProps> = ({
   confirmRole
