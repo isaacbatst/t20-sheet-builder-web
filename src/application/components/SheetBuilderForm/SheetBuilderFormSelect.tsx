@@ -12,6 +12,8 @@ type Props<T, IsMulti extends boolean, V = Value<T, IsMulti>> = {
   isSearcheable?: boolean
   isMulti?: IsMulti
   id: string
+  defaultValue?: T
+  isClearable?: boolean
   onChange: (option: V) => void
 }
 
@@ -27,6 +29,8 @@ const SheetBuilderFormSelect = <T, isMulti extends boolean = false, V extends Va
       isSearchable={props.isSearcheable ?? false}
       isMulti={props.isMulti}
       instanceId={props.id}
+      isClearable={props.isClearable}
+      defaultValue={props.defaultValue}
     />
   )
 }

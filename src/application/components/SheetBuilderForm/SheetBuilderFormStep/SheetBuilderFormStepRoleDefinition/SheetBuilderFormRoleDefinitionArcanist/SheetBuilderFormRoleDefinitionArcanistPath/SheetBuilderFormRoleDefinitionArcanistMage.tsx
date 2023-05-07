@@ -1,9 +1,9 @@
-import React from 'react'
-import SheetBuilderFormSelect from '../../../SheetBuilderFormSelect'
-import { SpellCircle, SpellName, Spells, Translator } from 't20-sheet-builder'
+import { SpellCircle, Spells, Translator } from 't20-sheet-builder'
+import SheetBuilderFormSelect from '../../../../SheetBuilderFormSelect'
+import { selectMageSpell, useArcanistContextDispatch } from '../SheetBuilderFormRoleDefinitionArcanistContext'
 
 const SheetBuilderFormRoleDefinitionArcanistMage = () => {
-  const [spell, setSpell] = React.useState<SpellName>()
+  const dispatch = useArcanistContextDispatch()
   return (
     <div>
       <p>Você recebe uma magia adicional</p>
@@ -12,7 +12,7 @@ const SheetBuilderFormRoleDefinitionArcanistMage = () => {
           value: spellName,
           label: Translator.getSpellTranslation(spellName)
         }))}
-        onChange={(option) => setSpell(option?.value)}
+        onChange={(option) => dispatch(selectMageSpell(option?.value))}
         className='mb-3'
         placeholder='Escolha uma magia'
         id='arcanist-mage-spell-select'

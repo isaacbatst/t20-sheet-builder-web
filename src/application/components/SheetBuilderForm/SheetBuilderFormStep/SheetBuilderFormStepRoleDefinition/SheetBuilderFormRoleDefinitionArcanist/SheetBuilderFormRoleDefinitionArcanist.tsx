@@ -1,35 +1,23 @@
 import React from 'react'
-import { Arcanist, ArcanistPathName } from 't20-sheet-builder'
-import SkillGroupSelect from '../SkillGroupSelect'
-import ArcanistPathSelect from './ArcanistPathSelect'
+import { RoleComponentProps } from '../SheetBuilderFormStepRoleDefinition'
+import SheetBuilderFormRoleDefinitionArcanistConfirm from './SheetBuilderFormRoleDefinitionArcanistConfirm'
+import { ArcanistContextProvider } from './SheetBuilderFormRoleDefinitionArcanistContext'
 import SheetBuilderFormRoleDefinitionArcanistInitialSpells from './SheetBuilderFormRoleDefinitionArcanistInitialSpells'
-import SheetBuilderFormRoleDefinitionArcanistMage from './SheetBuilderFormRoleDefinitionArcanistMage'
-import SheetBuilderFormRoleDefinitionArcanistSorcerer from './SheetBuilderFormRoleDefinitionArcanistSorcerer'
-import SheetBuilderFormRoleDefinitionArcanistWizard from './SheetBuilderFormRoleDefinitionArcanistWizard'
+import SheetBuilderFormRoleDefinitionArcanistPath from './SheetBuilderFormRoleDefinitionArcanistPath/SheetBuilderFormRoleDefinitionArcanistPath'
+import SheetBuilderFormRoleDefinitionArcanistSkillSelect from './SheetBuilderFormRoleDefinitionArcanistSkillSelect'
 
-const pathComponents: Record<ArcanistPathName, React.FC> = {
-  mage: SheetBuilderFormRoleDefinitionArcanistMage,
-  sorcerer: SheetBuilderFormRoleDefinitionArcanistSorcerer,
-  wizard: SheetBuilderFormRoleDefinitionArcanistWizard
-}
-
-const SheetBuilderFormRoleDefinitionArcanist = () => {
-  const [path, setPath] = React.useState<ArcanistPathName>()
-  const PathComponent = path ? pathComponents[path] : null
+const SheetBuilderFormRoleDefinitionArcanist: React.FC<RoleComponentProps> = ({
+  confirmRole
+}) => {
   return (
-    <div>
+    <ArcanistContextProvider>
       <div>
-        {Arcanist.selectSkillGroups.map((skillGroup, index) => (
-          <SkillGroupSelect skillGroup={skillGroup} key={index} />
-        ))}
-      </div>
-      <div>
+        <SheetBuilderFormRoleDefinitionArcanistSkillSelect />
         <SheetBuilderFormRoleDefinitionArcanistInitialSpells />
-        <h3>Caminho do arcanista</h3>
-        <ArcanistPathSelect setPath={setPath} />
-        {PathComponent && <PathComponent />}
+        <SheetBuilderFormRoleDefinitionArcanistPath />
+        <SheetBuilderFormRoleDefinitionArcanistConfirm confirmRole={confirmRole}/>
       </div>
-    </div>
+    </ArcanistContextProvider>
   )
 }
 

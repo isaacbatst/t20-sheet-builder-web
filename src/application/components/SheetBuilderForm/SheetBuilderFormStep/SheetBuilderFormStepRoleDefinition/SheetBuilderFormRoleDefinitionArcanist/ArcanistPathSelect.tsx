@@ -1,5 +1,4 @@
 import { Option } from '@/domain/entities/Option'
-import React from 'react'
 import { ArcanistPathName, Translator } from 't20-sheet-builder'
 import SheetBuilderFormSelect from '../../../SheetBuilderFormSelect'
 

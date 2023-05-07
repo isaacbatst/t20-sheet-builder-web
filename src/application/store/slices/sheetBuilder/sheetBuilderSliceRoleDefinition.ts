@@ -25,6 +25,6 @@ export const sheetBuilderSliceRaceDefinition = createSlice({
   }
 })
 
-export const { submitRole } = sheetBuilderSliceRaceDefinition.actions
+export const { submitRole, resetRole } = sheetBuilderSliceRaceDefinition.actions
 
 export default sheetBuilderSliceRaceDefinition
