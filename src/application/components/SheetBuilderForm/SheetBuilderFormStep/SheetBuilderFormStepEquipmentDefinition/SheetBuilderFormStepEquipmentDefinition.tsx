@@ -9,7 +9,7 @@ const defaultEquipment = [
 ]
 
 const SheetBuilderFormStepEquipmentDefinition = () => {
-  const [selectedSimpleWeapon, setSelectedSimpleWeapon] = React.useState<EquipmentName>()
+  const [, setSelectedSimpleWeapon] = React.useState<EquipmentName>()
 
   return (
     <div>

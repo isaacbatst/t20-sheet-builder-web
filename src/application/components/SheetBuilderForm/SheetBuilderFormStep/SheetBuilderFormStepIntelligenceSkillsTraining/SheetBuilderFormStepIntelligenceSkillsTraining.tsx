@@ -6,7 +6,7 @@ import { selectAttribute } from '@/application/store/slices/sheetBuilder/sheetBu
 
 const SheetBuilderFormStepIntelligenceSkillsTraining = () => {
   const intelligence = useAppSelector(selectAttribute('intelligence'))
-  const [selectedSkills, setSelectedSkills] = React.useState<SkillName[]>([])
+  const [, setSelectedSkills] = React.useState<SkillName[]>([])
   const options = Object.values(SkillName).map(skillName => ({
     label: Translator.getSkillTranslation(skillName),
     value: skillName

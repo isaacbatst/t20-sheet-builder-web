@@ -1,5 +1,4 @@
-import { Attributes } from "t20-sheet-builder"
-import { SkillName, GeneralPowerName, RaceName, Proficiency, RoleName } from "t20-sheet-builder"
+import { Attributes, GeneralPowerName, RaceName, RoleName, SkillName } from "t20-sheet-builder"
 import { UnknownObject } from "t20-sheet-builder/build/common/types/UnknownObject"
 
 export interface SheetBuilderStateRaceHumanVersatileChoiceSkill {
