@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { SheetBuilderStateRole, SubmitRolePayload } from './types'
+import { SheetBuilderStateRole } from './types'
 
-export interface SheetBuilderState {
+export interface SheetBuilderRoleDefinitionState {
   role?: SheetBuilderStateRole
 }
 
-const initialState: SheetBuilderState = {
+const initialState: SheetBuilderRoleDefinitionState = {
   role: undefined
 }
 
@@ -16,11 +16,8 @@ export const sheetBuilderSliceRaceDefinition = createSlice({
     resetRole: (state) => {
       state.role = undefined
     },
-    submitRole: (state, action: PayloadAction<SubmitRolePayload>) => {
-      state.role = {
-        name: action.payload.name,
-        chosenSkills: action.payload.chosenSkills
-      }
+    submitRole: (state, action: PayloadAction<SheetBuilderStateRole>) => {
+      state.role = action.payload
     },
   }
 })

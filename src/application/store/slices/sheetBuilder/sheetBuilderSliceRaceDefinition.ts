@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RaceName } from 't20-sheet-builder'
-import { SheetBuilderStateRace, SubmitRaceHumanPayload, SubmitRacePayload } from './types'
+import { SheetBuilderStateRace } from './types'
 
-export interface SheetBuilderState {
+export interface SheetBuilderRaceDefinitionState {
   race?: SheetBuilderStateRace
 }
 
-const initialState: SheetBuilderState = {
+const initialState: SheetBuilderRaceDefinitionState = {
   race: undefined
 }
 
@@ -17,22 +16,12 @@ export const sheetBuilderSliceRaceDefinition = createSlice({
     resetRace: (state) => {
       state.race = undefined
     },
-    submitRaceHuman: (state, action: PayloadAction<SubmitRaceHumanPayload>) => {
-      state.race = {
-        attributeModifiers: action.payload.attributeModifiers,
-        name: RaceName.human,
-        versatileChoices: action.payload.versatileChoices
-      }
-    },
-    submitRaceDwarf: (state, action: PayloadAction<SubmitRacePayload>) => {
-      state.race = {
-        name: RaceName.dwarf,
-        attributeModifiers: action.payload.attributeModifiers
-      }
+    submitRace: (state, action: PayloadAction<SheetBuilderStateRace>) => {
+      state.race = action.payload
     },
   }
 })
 
-export const { resetRace, submitRaceHuman, submitRaceDwarf } = sheetBuilderSliceRaceDefinition.actions
+export const { resetRace, submitRace } = sheetBuilderSliceRaceDefinition.actions
 
 export default sheetBuilderSliceRaceDefinition

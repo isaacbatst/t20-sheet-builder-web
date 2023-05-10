@@ -1,5 +1,5 @@
 import { submitRole } from "@/application/store/slices/sheetBuilder/sheetBuilderSliceRoleDefinition";
-import { ArcanisPathWizardFocusName, Arcanist, ArcanistBuilder, ArcanistLineage, ArcanistLineageDraconic, ArcanistLineageFaerie, ArcanistLineageRed, ArcanistLineageType, ArcanistPath, ArcanistPathMage, ArcanistPathSorcerer, ArcanistPathWizard, ArcanistPathWizardFocusFactory, GeneralPowerFactory, SpellFactory } from "t20-sheet-builder";
+import { ArcanisPathWizardFocusName, Arcanist, ArcanistBuilder, ArcanistLineage, ArcanistLineageDraconic, ArcanistLineageFaerie, ArcanistLineageRed, ArcanistLineageType, ArcanistPath, ArcanistPathMage, ArcanistPathName, ArcanistPathSorcerer, ArcanistPathWizard, ArcanistPathWizardFocusFactory, GeneralPowerFactory, Level, SpellFactory } from "t20-sheet-builder";
 import { Role } from "t20-sheet-builder/build/domain/entities/Role/Role";
 import { ConfirmFunction } from "../../../useSheetBuilderSubmit";
 import { useArcanistContext } from "./SheetBuilderFormRoleDefinitionArcanistContext";
@@ -68,10 +68,64 @@ export const useConfirmArcanist = (confirmRole: ConfirmFunction<Role>) => {
   }
 
   const createSubmitAction = (arcanist: Arcanist) => {
-    return submitRole({
-      chosenSkills: arcanist.chosenSkills,
-      name: arcanist.name
-    })
+    const path = arcanist.abilitiesPerLevel[Level.one].arcanistPath
+    if(path instanceof ArcanistPathMage) {
+      return submitRole({
+        name: arcanist.name,
+        path: ArcanistPathName.mage,
+        chosenSkills: arcanist.chosenSkills,
+        spells: arcanist.abilitiesPerLevel[Level.one].arcanistSpells.effects.passive.default.spells.map(spell => spell.name),
+        extraSpell: path.additionalSpell.name
+      })
+    }
+
+    if(path instanceof ArcanistPathWizard) {
+      return submitRole({
+        path: ArcanistPathName.wizard,
+        name: arcanist.name,
+        chosenSkills: arcanist.chosenSkills,
+        spells: arcanist.abilitiesPerLevel[Level.one].arcanistSpells.effects.passive.default.spells.map(spell => spell.name),
+        focus: path.focus.equipment.name as ArcanisPathWizardFocusName
+      })
+    }
+
+    if(path instanceof ArcanistPathSorcerer) {
+      if(path.lineage instanceof ArcanistLineageDraconic) {
+        return submitRole({
+          path: ArcanistPathName.sorcerer,
+          name: arcanist.name,
+          chosenSkills: arcanist.chosenSkills,
+          spells: arcanist.abilitiesPerLevel[Level.one].arcanistSpells.effects.passive.default.spells.map(spell => spell.name),
+          lineage: ArcanistLineageType.draconic,
+          damageType: path.lineage.effects.basic.passive.damageReduction.damageType
+        })
+      }
+
+      if(path.lineage instanceof ArcanistLineageFaerie) {
+        return submitRole({
+          path: ArcanistPathName.sorcerer,
+          name: arcanist.name,
+          chosenSkills: arcanist.chosenSkills,
+          spells: arcanist.abilitiesPerLevel[Level.one].arcanistSpells.effects.passive.default.spells.map(spell => spell.name),
+          lineage: ArcanistLineageType.faerie,
+          extraSpell: path.lineage.effects.basic.passive.extraSpell.spell.name
+        })
+      }
+
+      if(path.lineage instanceof ArcanistLineageRed) {
+        return submitRole({
+          path: ArcanistPathName.sorcerer,
+          name: arcanist.name,
+          chosenSkills: arcanist.chosenSkills,
+          spells: arcanist.abilitiesPerLevel[Level.one].arcanistSpells.effects.passive.default.spells.map(spell => spell.name),
+          lineage: ArcanistLineageType.red,
+          extraPower: path.lineage.effects.basic.passive.extraTormentaPower.power.name,
+          customTormentaAttribute: path.lineage.effects.basic.passive.customTormentaPowersAttribute.attribute
+        })
+      }
+    }
+    
+    throw new Error('UNKNOWN_PATH_ERROR')
   }
 
   const confirmArcanist = () => {

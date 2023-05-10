@@ -1,11 +1,11 @@
+import { submitRace } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRaceDefinition'
+import { SheetBuilderStateRaceHumanVersatileChoice } from '@/application/store/slices/sheetBuilder/types'
 import React, { useCallback } from 'react'
-import { Attribute, Attributes, GeneralPowerName, Human, SkillName, VersatileChoiceFactory, VersatileChoiceType } from 't20-sheet-builder'
+import { Attribute, Attributes, GeneralPowerName, Human, RaceName, SkillName, VersatileChoiceFactory, VersatileChoiceType } from 't20-sheet-builder'
 import ConfirmButton from '../../../ConfirmButton'
 import { RaceComponentProps } from '../SheetBuilderFormStepRaceDefinition'
 import SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes from './SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes'
 import SheetBuilderFormStepRaceDefinitionHumanVersatile from './SheetBuilderFormStepRaceDefinitionHumanVersatile'
-import { submitRaceHuman } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRaceDefinition'
-import { SheetBuilderStateRaceHumanVersatileChoice } from '@/application/store/slices/sheetBuilder/types'
 
 export type AttributeCheckboxes = Record<Attribute, boolean>
 
@@ -26,6 +26,10 @@ const SheetBuilderFormStepRaceDefinitionHuman: React.FC<RaceComponentProps> = ({
     wisdom: false 
   })
 
+  const selectedAttributes = Object.entries(attributeCheckboxes)
+    .filter(([_attribute, checked]) => checked)
+    .map(([attribute]) => attribute as Attribute)
+
   const toggleAttribute = useCallback((attribute: Attribute) => {
     const updated = ({...attributeCheckboxes, [attribute]: !attributeCheckboxes[attribute]})
     const attributeModifiers = Object.entries(updated)
@@ -40,10 +44,6 @@ const SheetBuilderFormStepRaceDefinitionHuman: React.FC<RaceComponentProps> = ({
   }, [setAttributeModifiers, attributeCheckboxes])
 
   const makeHuman = () => {
-    const selectedAttributes = Object.entries(attributeCheckboxes)
-      .filter(([_attribute, checked]) => checked)
-      .map(([attribute]) => attribute as Attribute)
-
     if(!firstVersatileOption) {
       throw new Error('MISSING_VERSATILE_FIRST_OPTION')
     }
@@ -64,7 +64,9 @@ const SheetBuilderFormStepRaceDefinitionHuman: React.FC<RaceComponentProps> = ({
 
   const createSubmitAction = (human: Human) => {
     const choices = human.versatileChoices.map(choice => ({type: choice.type, name: choice.name}))
-    return submitRaceHuman({
+    return submitRace({
+      name: RaceName.human,
+      selectedAttributes,
       versatileChoices: choices as SheetBuilderStateRaceHumanVersatileChoice[],
       attributeModifiers: human.attributeModifiers
     })

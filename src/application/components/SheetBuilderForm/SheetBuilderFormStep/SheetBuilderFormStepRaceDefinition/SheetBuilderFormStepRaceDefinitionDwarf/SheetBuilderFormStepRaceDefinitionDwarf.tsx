@@ -1,8 +1,8 @@
 import React from 'react'
-import { Dwarf } from 't20-sheet-builder'
+import { Dwarf, RaceName } from 't20-sheet-builder'
 import ConfirmButton from '../../../ConfirmButton'
 import { RaceComponentProps } from '../SheetBuilderFormStepRaceDefinition'
-import { submitRaceDwarf } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRaceDefinition'
+import { submitRace } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRaceDefinition'
 
 const SheetBuilderFormStepRaceDefinitionDwarf: React.FC<RaceComponentProps> = ({
   attributesPreview,
@@ -12,7 +12,7 @@ const SheetBuilderFormStepRaceDefinitionDwarf: React.FC<RaceComponentProps> = ({
     return new Dwarf()
   }
   const createSubmitAction = (dwarf: Dwarf) => {
-    return submitRaceDwarf({attributeModifiers: dwarf.attributeModifiers})
+    return submitRace({name: RaceName.dwarf, attributeModifiers: dwarf.attributeModifiers})
   }
 
   const confirmDwarf = () => {
