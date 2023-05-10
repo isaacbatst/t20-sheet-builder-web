@@ -3,10 +3,11 @@ import { Dwarf, RaceName } from 't20-sheet-builder'
 import ConfirmButton from '../../../ConfirmButton'
 import { RaceComponentProps } from '../SheetBuilderFormStepRaceDefinition'
 import { submitRace } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRaceDefinition'
+import AttributesPreviewStatic from '../AtrributesPreviewStatic'
 
 const SheetBuilderFormStepRaceDefinitionDwarf: React.FC<RaceComponentProps> = ({
-  attributesPreview,
   confirmRace,
+  attributesPreview
 }) => {
   const makeDwarf = () => {
     return new Dwarf()
@@ -22,7 +23,9 @@ const SheetBuilderFormStepRaceDefinitionDwarf: React.FC<RaceComponentProps> = ({
   return (
     <div>
       <p className='mb-6'>Duro como pedra!</p>
-      {attributesPreview}
+      <AttributesPreviewStatic 
+        attributesPreview={attributesPreview}
+      />
       <ConfirmButton confirm={confirmDwarf} />
     </div>
   )

@@ -1,15 +1,16 @@
 import { Attribute } from 't20-sheet-builder'
 import AttributeCheckbox from '../AttributeCheckbox'
-import { AttributeCheckboxes } from './SheetBuilderFormStepRaceDefinitionHuman'
+import { AttributePreview } from '../AttributePreview'
+import AttributePreviewItem from '../AttributePreviewItem'
 
 
 type Props = {
-  attributeCheckboxes: AttributeCheckboxes
+  attributesPreview: AttributePreview[]
   toggleAttribute: (attribute: Attribute) => void
 }
 
 const SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes = ({
-  attributeCheckboxes,
+  attributesPreview,
   toggleAttribute,
 }: Props) => {
   
@@ -17,14 +18,21 @@ const SheetBuilderFormStepRaceDefinitionHumanAttributeCheckboxes = ({
   return (
     <div className=''>
       <h3 className='mb-3'>+1 em três atributos diferentes</h3>
-      <div className='flex flex-row flex-wrap justify-center mb-6'>
-        {Object.entries(attributeCheckboxes).map(([attribute, checked]) => (
+      <ul className='flex flex-row flex-wrap gap-2 justify-center mb-6'>
+        {attributesPreview.map(({attribute, value, modifier}) => (
           <AttributeCheckbox 
-            key={attribute} attribute={attribute as Attribute} isChecked={checked} 
+            key={attribute}
             toggle={() => toggleAttribute(attribute as Attribute)}
+            attributePreviewItem={
+              <AttributePreviewItem 
+                attribute={attribute as Attribute}
+                value={value}
+                modifier={modifier}
+              />
+            }
           />
         ))}
-      </div>
+      </ul>
     </div>
   )
 }
