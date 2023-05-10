@@ -1,6 +1,6 @@
 import { submitRole } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRoleDefinition'
 import React, { useState } from 'react'
-import { SkillName, Warrior } from 't20-sheet-builder'
+import { RoleName, SkillName, Warrior } from 't20-sheet-builder'
 import ConfirmButton from '../../../ConfirmButton'
 import { RoleComponentProps } from '../SheetBuilderFormStepRoleDefinition'
 import SkillGroupSelect from '../SkillGroupSelect'
@@ -15,7 +15,7 @@ const SheetBuilderFormRoleDefinitionWarrior: React.FC<RoleComponentProps> = ({
   const makeWarrior = () => new Warrior(selectedSkillsByGroup.flat())
   const createSubmitAction = (warrior: Warrior) => submitRole({
     chosenSkills: warrior.chosenSkills,
-    name: warrior.name
+    name: RoleName.warrior,
   })
   const confirmWarrior = () => {
     confirmRole(makeWarrior, createSubmitAction)
