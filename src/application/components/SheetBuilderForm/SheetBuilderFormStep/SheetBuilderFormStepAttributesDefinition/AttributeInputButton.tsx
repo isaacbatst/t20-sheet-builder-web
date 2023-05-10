@@ -19,7 +19,7 @@ const AttributeInputButton = ({onClick, children, side}: PropsWithChildren<Props
   return (
     <button type="button" onClick={onClick}
       className={`${className} bg-white text-slate-900 px-3 py-2
-      hover:bg-stone-200`}
+      hover:bg-stone-100 active:opacity-90`}
     >
       {children}
     </button>
