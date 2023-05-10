@@ -12,8 +12,8 @@ const ConfirmButton = ({confirm}: Props) => {
           bg-white px-8 py-3 mb-3 rounded-2xl 
           text-slate-900 font-bold 
           transition-colors
-          active:opacity-80
-          hover:scale-105'
+          hover:opacity-95
+          active:scale-105'
     >
       Confirmar
     </button>  )

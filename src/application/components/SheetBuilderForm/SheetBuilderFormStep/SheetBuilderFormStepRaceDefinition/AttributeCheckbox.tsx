@@ -6,7 +6,7 @@ type Props = {
 
 const AttributeCheckbox = ({attributePreviewItem, toggle}: Props) => {
   return (
-    <button onClick={toggle}>
+    <button onClick={toggle} className="hover:opacity-90 active:scale-105">
       {attributePreviewItem}
     </button>
   )

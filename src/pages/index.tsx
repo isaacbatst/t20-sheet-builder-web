@@ -1,9 +1,17 @@
+import Header from '@/application/components/Header/Header';
 import SheetBuilderForm from '@/application/components/SheetBuilderForm/SheetBuilderForm'
 import SheetPreview from '@/application/components/SheetPreview/SheetPreview';
 import Head from 'next/head'
+import { useState } from 'react';
 import 'react-tabs/style/react-tabs.css';
 
 export default function Home() {
+  const [isShowingPreview, setIsShowingPreview] = useState(false)
+
+  const togglePreview = () => {
+    setIsShowingPreview(!isShowingPreview)
+  }
+
   return (
     <>
       <Head>
@@ -14,11 +22,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='text-center min-h-screen'>
-        <header>
-          <h1>Construa sua ficha</h1>
-        </header>
-        <SheetBuilderForm />
-        <SheetPreview />
+        <Header  
+          isShowingPreview={isShowingPreview}
+          togglePreview={togglePreview}
+        />
+        <div className='pt-8'>
+          {isShowingPreview && <SheetPreview />}
+          {!isShowingPreview && <SheetBuilderForm />}
+        </div>
       </main>
     </>
   )
