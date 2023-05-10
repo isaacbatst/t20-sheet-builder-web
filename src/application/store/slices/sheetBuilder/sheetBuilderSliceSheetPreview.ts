@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BuildingSheet, OutOfGameContext, SerializedSheetInterface, SheetSerializer } from 't20-sheet-builder';
+import { RootState } from '../..';
 
 export interface SheetBuilderSheetPreviewState {
   preview: SerializedSheetInterface
@@ -23,5 +24,7 @@ export const sheetBuilderSliceSheetPreview = createSlice({
 })
 
 export const { updatePreview } = sheetBuilderSliceSheetPreview.actions
+
+export const selectPreview = (state: RootState) => state.sheetBuilder.sheet.preview
 
 export default sheetBuilderSliceSheetPreview

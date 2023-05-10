@@ -9,5 +9,5 @@ export const takeLatest = async <
   listenerApi.cancelActiveListeners()
 
   // Delay before starting actual work
-  await listenerApi.delay(500)
+  await listenerApi.delay(200)
 }

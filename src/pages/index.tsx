@@ -1,4 +1,5 @@
 import SheetBuilderForm from '@/application/components/SheetBuilderForm/SheetBuilderForm'
+import SheetPreview from '@/application/components/SheetPreview/SheetPreview';
 import Head from 'next/head'
 import 'react-tabs/style/react-tabs.css';
 
@@ -17,6 +18,7 @@ export default function Home() {
           <h1>Construa sua ficha</h1>
         </header>
         <SheetBuilderForm />
+        <SheetPreview />
       </main>
     </>
   )

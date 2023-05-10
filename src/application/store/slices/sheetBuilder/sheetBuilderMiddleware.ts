@@ -1,5 +1,5 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import SheetBuilder, { ArcanistBuilder, ArcanistLineage, ArcanistLineageDraconic, ArcanistLineageFaerie, ArcanistLineageRed, ArcanistLineageType, ArcanistPath, ArcanistPathMage, ArcanistPathName, ArcanistPathSorcerer, ArcanistPathWizard, ArcanistPathWizardFocusFactory, BuildingSheet, Dwarf, GeneralPowerFactory, Human, OutOfGameContext, RaceInterface, RaceName, RoleInterface, RoleName, SheetSerializer, SpellFactory, Warrior } from "t20-sheet-builder";
+import SheetBuilder, { ArcanistBuilder, ArcanistLineage, ArcanistLineageDraconic, ArcanistLineageFaerie, ArcanistLineageRed, ArcanistLineageType, ArcanistPath, ArcanistPathMage, ArcanistPathName, ArcanistPathSorcerer, ArcanistPathWizard, ArcanistPathWizardFocusFactory, BuildingSheet, Dwarf, GeneralPowerFactory, Human, OutOfGameContext, RaceInterface, RaceName, RoleInterface, RoleName, SheetSerializer, SpellFactory, VersatileChoiceFactory, Warrior } from "t20-sheet-builder";
 import { AppStartListening } from "../..";
 import { takeLatest } from "../../sagas";
 import { updatePreview } from "./sheetBuilderSliceSheetPreview";
@@ -54,7 +54,8 @@ startListening({
 
 function makeRace(serializedRace: SheetBuilderStateRace): RaceInterface {
   if(serializedRace.name === RaceName.human){
-    return new Human(serializedRace.selectedAttributes)
+    const choices = serializedRace.versatileChoices.map((choice) => VersatileChoiceFactory.make(choice.type, choice.name))
+    return new Human(serializedRace.selectedAttributes, choices)
   }
 
   if(serializedRace.name === RaceName.dwarf){
