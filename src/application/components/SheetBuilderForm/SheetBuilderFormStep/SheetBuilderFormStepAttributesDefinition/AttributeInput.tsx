@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/application/store/hooks'
-import { selectAttribute, incrementAttribute, decrementAttribute } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceInitialAttributes'
+import { decrementAttribute, incrementAttribute, selectAttribute } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceInitialAttributes'
 import { Attribute, Translator } from 't20-sheet-builder'
+import AttributeInputButton from './AttributeInputButton'
 
 type Props = {
   attribute: Attribute
@@ -10,11 +11,23 @@ const AttributeInput = ({attribute}: Props) => {
   const dispatch = useAppDispatch();
   const attributeValue = useAppSelector(selectAttribute(attribute))
   return (
-    <div>
-      <label>{Translator.getAttributeTranslation(attribute)}</label>
-      <button type="button" onClick={() => dispatch(incrementAttribute(attribute))}>+</button>
-      <input disabled type="number" value={attributeValue} className='text-slate-900' />
-      <button type="button" onClick={() => dispatch(decrementAttribute(attribute))}>-</button>
+    <div className='flex flex-col items-center mb-6'>
+      <label className='text-xs mb-2'>{Translator.getAttributeTranslation(attribute)}</label>
+      <div className="flex flex-row">
+        <AttributeInputButton 
+          side='left'
+          onClick={() => dispatch(decrementAttribute(attribute))}>
+          -
+        </AttributeInputButton>
+        <input disabled type="number" value={attributeValue} 
+          className='text-slate-900 w-8 text-center bg-white' 
+        />
+        <AttributeInputButton 
+          side='right'
+          onClick={() => dispatch(incrementAttribute(attribute))}>
+          +
+        </AttributeInputButton>
+      </div>
     </div>
   )
 }

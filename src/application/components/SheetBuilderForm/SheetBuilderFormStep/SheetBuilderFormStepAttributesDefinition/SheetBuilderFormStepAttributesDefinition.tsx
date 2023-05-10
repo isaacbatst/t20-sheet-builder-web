@@ -5,7 +5,7 @@ const SheetBuilderFormStepAttributesDefinition = () => {
 
   return (
     <SheetBuilderFormStepAttributesDefinitionProvider>
-      <form>
+      <form className='flex flex-row flex-wrap justify-center gap-4'>
         <AttributeInput attribute='strength' />
         <AttributeInput attribute='dexterity' />
         <AttributeInput attribute='constitution' />
