@@ -1,6 +1,6 @@
 import { updateItemByIndex } from "@/application/common/Imutable"
 import React, { PropsWithChildren, Reducer, useContext, useReducer } from "react"
-import { SkillName, SpellName, ArcanistPathName, EquipmentName, Arcanist, ArcanistLineageType, ArcanistLineageDraconicDamageType, GeneralPowerName, Attribute } from "t20-sheet-builder"
+import { ArcanisPathWizardFocusName, Arcanist, ArcanistLineageDraconicDamageType, ArcanistLineageType, ArcanistPathName, Attribute, GeneralPowerName, SkillName, SpellName } from "t20-sheet-builder"
 
 
 export type ArcanistContextType = {
@@ -8,7 +8,7 @@ export type ArcanistContextType = {
   initialSpells: SpellName[]
   selectedPath?: ArcanistPathName
   mageSpell?: SpellName
-  wizardFocus?: EquipmentName
+  wizardFocus?: ArcanisPathWizardFocusName
   sorcererLineage?: ArcanistLineageType
 	sorcererLineageDraconicDamageType?: ArcanistLineageDraconicDamageType;
   sorcererLineageFaerieExtraSpell?: SpellName
@@ -36,7 +36,7 @@ type ActionPayloads = {
   updateInitialSpells: SpellName[],
   selectPath: ArcanistPathName | undefined,
   selectMageSpell: SpellName | undefined,
-  selectWizardFocus: EquipmentName | undefined,
+  selectWizardFocus: ArcanisPathWizardFocusName | undefined,
   selectSorcererLineage: ArcanistLineageType | undefined
   selectSorcererLineageDraconicDamageType: ArcanistLineageDraconicDamageType | undefined
   selectSorcererLineageFaerieExtraSpell: SpellName | undefined
@@ -58,7 +58,7 @@ const actionsCreators: {
       type: ArcanistContextActionType.selectMageSpell
     }
   },
-  selectWizardFocus(payload?: EquipmentName) {
+  selectWizardFocus(payload?: ArcanisPathWizardFocusName) {
     return {
       payload,
       type: ArcanistContextActionType.selectWizardFocus

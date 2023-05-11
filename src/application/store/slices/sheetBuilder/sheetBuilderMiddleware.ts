@@ -1,9 +1,10 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import SheetBuilder, { ArcanistBuilder, ArcanistLineage, ArcanistLineageDraconic, ArcanistLineageFaerie, ArcanistLineageRed, ArcanistLineageType, ArcanistPath, ArcanistPathMage, ArcanistPathName, ArcanistPathSorcerer, ArcanistPathWizard, ArcanistPathWizardFocusFactory, BuildingSheet, Dwarf, GeneralPowerFactory, Human, OutOfGameContext, RaceInterface, RaceName, RoleInterface, RoleName, SheetSerializer, SpellFactory, VersatileChoiceFactory, Warrior } from "t20-sheet-builder";
+import SheetBuilder, { Arcanist, ArcanistBuilder, ArcanistLineageFactory, ArcanistLineageFactoryDraconic, ArcanistLineageFactoryFaerie, ArcanistLineageFactoryRed, ArcanistLineageType, ArcanistPathFactory, ArcanistPathFactoryMage, ArcanistPathFactorySorcerer, ArcanistPathFactoryWizard, ArcanistPathName, BuildingSheet, Dwarf, Human, OutOfGameContext, RaceInterface, RaceName, RoleInterface, RoleName, SerializedArcanist, SerializedArcanistLineage, SerializedArcanistPath, SerializedRole, SheetSerializer, SpellFactory, VersatileChoiceFactory, Warrior } from "t20-sheet-builder";
 import { AppStartListening } from "../..";
 import { takeLatest } from "../../sagas";
 import { updatePreview } from "./sheetBuilderSliceSheetPreview";
 import { SheetBuilderStateRace, SheetBuilderStateRole } from "./types";
+import { makeArcanistFromSerialized } from "@/application/common/roles/Arcanist";
 
 export const sheetBuilderMiddleware = createListenerMiddleware()
 
@@ -52,6 +53,7 @@ startListening({
   }
 })
 
+
 function makeRace(serializedRace: SheetBuilderStateRace): RaceInterface {
   if(serializedRace.name === RaceName.human){
     const choices = serializedRace.versatileChoices.map((choice) => VersatileChoiceFactory.make(choice.type, choice.name))
@@ -70,51 +72,9 @@ function makeRole(serializedRole: SheetBuilderStateRole): RoleInterface {
     return new Warrior(serializedRole.chosenSkills)
   }
 
+  
   if(serializedRole.name === RoleName.arcanist){
-    let path: ArcanistPath | undefined;
-
-    if(serializedRole.path === ArcanistPathName.mage){ 
-      const spell = SpellFactory.make(serializedRole.extraSpell)
-      path = new ArcanistPathMage(spell)
-    }
-
-    if(serializedRole.path === ArcanistPathName.wizard){
-      const focus = ArcanistPathWizardFocusFactory.make(serializedRole.focus)
-      path = new ArcanistPathWizard(focus)
-    }
-
-    if(serializedRole.path === ArcanistPathName.sorcerer){
-      let lineage: ArcanistLineage | undefined;
-
-      if(serializedRole.lineage === ArcanistLineageType.draconic){
-        lineage = new ArcanistLineageDraconic(serializedRole.damageType)
-      }
-
-      if(serializedRole.lineage === ArcanistLineageType.faerie){
-        const spell = SpellFactory.make(serializedRole.extraSpell)
-        lineage = new ArcanistLineageFaerie(spell)
-      }
-
-      if(serializedRole.lineage === ArcanistLineageType.red){
-        const power = GeneralPowerFactory.make({name: serializedRole.extraPower})
-        lineage = new ArcanistLineageRed(power, serializedRole.customTormentaAttribute)
-      }
-
-      if(!lineage){
-        throw new Error('UNKNOWN_LINEAGE')
-      }
-
-      path = new ArcanistPathSorcerer(lineage)
-    }
-
-    if(!path){
-      throw new Error('UNKNOWN_PATH')
-    }
-
-    return ArcanistBuilder
-      .chooseSkills(serializedRole.chosenSkills)
-      .choosePath(path)
-      .chooseSpells(serializedRole.spells.map(spell => SpellFactory.make(spell)))
+    return makeArcanistFromSerialized(serializedRole)
   }
 
   throw new Error(`UNKNOWN_ROLE`)
