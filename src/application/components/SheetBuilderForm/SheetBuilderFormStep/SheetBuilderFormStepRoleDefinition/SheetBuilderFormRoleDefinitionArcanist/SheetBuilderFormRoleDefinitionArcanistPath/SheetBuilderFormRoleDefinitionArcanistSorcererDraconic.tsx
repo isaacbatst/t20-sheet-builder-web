@@ -4,6 +4,7 @@ import { selectAttribute } from '@/application/store/slices/sheetBuilder/sheetBu
 import { Option } from '@/domain/entities/Option'
 import { ArcanistLineageDraconicDamageType, DamageType, Translator } from 't20-sheet-builder'
 import { selectSorcererLineageDraconicDamageType, useArcanistContextDispatch } from '../SheetBuilderFormRoleDefinitionArcanistContext'
+import { addSign } from '@/application/common/StringHelper'
 
 const damageOptions: Option<ArcanistLineageDraconicDamageType>[] = [
   {
@@ -28,8 +29,10 @@ const SheetBuilderFormRoleDefinitionArcanistSorcererDraconic = () => {
   const dispatch = useArcanistContextDispatch()
   return (
     <div className='mb-3'>
-      <p>Você soma seu carisma ({charisma}) em seus pontos de vida</p>
-      <p>Você recebe redução de dano 5 ao tipo escolhido</p>
+      <ul className='mb-3'>
+        <li className='mb-1'>Você soma seu carisma ({addSign(charisma)}) em seus pontos de vida</li>
+        <li className='mb-1'>Você recebe redução de dano 5 ao tipo escolhido</li>
+      </ul>
       <SheetBuilderFormSelect 
         id='arcanist-sorcerer-draconic-damage-type'
         options={damageOptions}
