@@ -1,17 +1,15 @@
 import { Arcanist } from 't20-sheet-builder'
 import SkillGroupSelect from '../SkillGroupSelect'
-import { updateSkillGroup, useArcanistContextDispatch } from './SheetBuilderFormRoleDefinitionArcanistContext'
+import { useArcanistFormContext } from './SheetBuilderFormRoleDefinitionArcanistContext'
 
 const SheetBuilderFormRoleDefinitionArcanistSkillSelect = () => {
-  const dispatch = useArcanistContextDispatch()
+  const {updateSkillGroup} = useArcanistFormContext()
   return (
     <div>
       {Arcanist.selectSkillGroups.map((skillGroup, index) => (
         <SkillGroupSelect 
-          setGroupSelectedSkills={(groupSelectedSkills) => dispatch(updateSkillGroup({
-            groupIndex: index,
-            skillGroup: groupSelectedSkills
-          }))}
+          setGroupSelectedSkills={(groupSelectedSkills) => 
+            updateSkillGroup(groupSelectedSkills, index)}
           skillGroup={skillGroup} key={index} 
         />
       ))}

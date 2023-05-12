@@ -1,6 +1,6 @@
 import React from "react"
 import SheetBuilderFormSelect from "../../../../SheetBuilderFormSelect"
-import { selectSorcererLineage, useArcanistContext, useArcanistContextDispatch } from "../SheetBuilderFormRoleDefinitionArcanistContext"
+import { selectSorcererLineage, useArcanistFormContext, useArcanistContextDispatch } from "../SheetBuilderFormRoleDefinitionArcanistContext"
 import { ArcanistLineageType } from "t20-sheet-builder"
 import SheetBuilderFormRoleDefinitionArcanistSorcererDraconic from "./SheetBuilderFormRoleDefinitionArcanistSorcererDraconic"
 import SheetBuilderFormRoleDefinitionArcanistSorcererFaerie from "./SheetBuilderFormRoleDefinitionArcanistSorcererFaerie"
@@ -20,7 +20,7 @@ const lineageComponents: Record<ArcanistLineageType, React.FC> = {
 
 const SheetBuilderFormRoleDefinitionArcanistSorcerer = () => {
   const dispatch = useArcanistContextDispatch()
-  const {sorcererLineage} = useArcanistContext()
+  const {sorcererLineage} = useArcanistFormContext()
   const LineageComponent = sorcererLineage ? lineageComponents[sorcererLineage] : null
   return <div>
     <p>Você possui uma linhagem sobrenatural</p>

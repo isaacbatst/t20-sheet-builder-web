@@ -19,12 +19,12 @@ export const useSheetBuilderConfirm = <Type, >() => {
     setSuccess(false)
   }
 
-  const confirm: ConfirmFunction<Type> = useCallback((makeRace, createSubmitAction) => {
+  const confirm: ConfirmFunction<Type> = useCallback((make, createSubmitAction) => {
     try {
       setSuccess(false)
       setError(undefined)
-      const race = makeRace();
-      const action = createSubmitAction(race)
+      const entity = make();
+      const action = createSubmitAction(entity)
       dispatch(action)
       setSuccess(true)
     } catch (err) {

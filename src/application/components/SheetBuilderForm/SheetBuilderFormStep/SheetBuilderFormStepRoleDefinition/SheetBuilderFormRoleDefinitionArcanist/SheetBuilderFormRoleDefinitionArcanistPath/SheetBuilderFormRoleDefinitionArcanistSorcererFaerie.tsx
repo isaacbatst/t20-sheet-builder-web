@@ -1,7 +1,7 @@
 import SheetBuilderFormSelect from '@/application/components/SheetBuilderForm/SheetBuilderFormSelect'
 import { Option } from '@/domain/entities/Option'
 import { SpellCircle, SpellName, SpellSchool, Spells, Translator } from 't20-sheet-builder'
-import { selectSorcererLineageFaerieExtraSpell, useArcanistContextDispatch } from '../SheetBuilderFormRoleDefinitionArcanistContext'
+import { useArcanistFormContext } from '../SheetBuilderFormRoleDefinitionArcanistContext'
 
 const spellOptions: Option<SpellName>[] = Spells.getAll()
   .filter(spell => spell.circle === SpellCircle.first
@@ -12,8 +12,7 @@ const spellOptions: Option<SpellName>[] = Spells.getAll()
   }))
 
 const SheetBuilderFormRoleDefinitionArcanistSorcererFaerie = () => {
-  const dispatch = useArcanistContextDispatch()
-
+  const {setSorcererLineageFaerieExtraSpell} = useArcanistFormContext()
   return (
     <div className='mb-3'>
       <p>Você se torna treinado em enganação</p>
@@ -22,7 +21,7 @@ const SheetBuilderFormRoleDefinitionArcanistSorcererFaerie = () => {
         id='arcanist-sorcerer-faerie-extra-spell'
         options={spellOptions}
         placeholder='Escolha a magia'
-        onChange={(option) => dispatch(selectSorcererLineageFaerieExtraSpell(option?.value))}
+        onChange={(option) => setSorcererLineageFaerieExtraSpell(option?.value)}
       />
     </div>
   )

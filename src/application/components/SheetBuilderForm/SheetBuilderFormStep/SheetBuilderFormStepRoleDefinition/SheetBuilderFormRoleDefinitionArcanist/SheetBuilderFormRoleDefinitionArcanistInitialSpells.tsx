@@ -1,9 +1,9 @@
 import { SpellCircle, Spells, Translator } from 't20-sheet-builder'
 import SheetBuilderFormSelect from '../../../SheetBuilderFormSelect'
-import { updateInitialSpells, useArcanistContextDispatch } from './SheetBuilderFormRoleDefinitionArcanistContext'
+import { useArcanistFormContext } from './SheetBuilderFormRoleDefinitionArcanistContext'
 
 const SheetBuilderFormRoleDefinitionArcanistInitialSpells = () => {
-  const dispatch = useArcanistContextDispatch()
+  const {setInitialSpells} = useArcanistFormContext()
   return (
     <div>
       <p>Você começa com 3 magias de primeiro círculo</p>
@@ -13,7 +13,7 @@ const SheetBuilderFormRoleDefinitionArcanistInitialSpells = () => {
           label: Translator.getSpellTranslation(spellName)
         }))}
         isMulti
-        onChange={(options) => dispatch(updateInitialSpells(options.map(({value}) => value)))}
+        onChange={(options) => setInitialSpells(options.map(({value}) => value))}
         className='mb-3'
         placeholder='Escolha as magias'
         id='arcanist-initial-spells-select'

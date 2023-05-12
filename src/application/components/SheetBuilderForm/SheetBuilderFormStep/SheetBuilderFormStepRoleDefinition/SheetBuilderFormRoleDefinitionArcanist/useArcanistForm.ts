@@ -1,29 +1,66 @@
-import { getArcanistFactoryFromContext } from "@/application/common/roles/Arcanist";
-import { submitRole } from "@/application/store/slices/sheetBuilder/sheetBuilderSliceRoleDefinition";
-import { Arcanist, ArcanistSerializer } from "t20-sheet-builder";
-import { Role } from "t20-sheet-builder/build/domain/entities/Role/Role";
-import { ConfirmFunction } from "../../../useSheetBuilderSubmit";
-import { useArcanistContext } from "./SheetBuilderFormRoleDefinitionArcanistContext";
+import { updateItemByIndex } from "@/application/common/Imutable"
+import { useState, useCallback } from "react"
+import { Arcanist, SkillName, SpellName, ArcanistPathName, ArcanisPathWizardFocusName, ArcanistLineageType, ArcanistLineageDraconicDamageType, GeneralPowerName, Attribute } from "t20-sheet-builder"
 
-export const useConfirmArcanist = (confirmRole: ConfirmFunction<Role>) => {
-  const context = useArcanistContext()
+export const useArcanistForm = () => {
+  const skillGroupsLength = Arcanist.selectSkillGroups.length
+  const initialSkillsByGroup = Array.from({length: skillGroupsLength}, () => [])
+  const [skillsByGroup, setSkillsByGroup] = useState<SkillName[][]>(initialSkillsByGroup)
+  const [initialSpells, setInitialSpells] = useState<SpellName[]>([])
+  const [path, setPath] = useState<ArcanistPathName>() 
+  const [mageSpell, setMageSpell] = useState<SpellName>() 
+  const [wizardFocus, setWizardFocus] = useState<ArcanisPathWizardFocusName>() 
+  const [sorcererLineage, setSorcererLineage] = useState<ArcanistLineageType>() 
+  const [sorcererLineageDraconicDamageType, setSorcererLineageDraconicDamageType] = useState<ArcanistLineageDraconicDamageType>() 
+  const [sorcererLineageFaerieExtraSpell, setSorcererLineageFaerieExtraSpell] = useState<SpellName>() 
+  const [sorcererLineageRedExtraPower, setSorcererLineageRedExtraPower] = useState<GeneralPowerName>() 
+  const [sorcererLineageRedAttribute, setSorcererLineageRedAttribute] = useState<Attribute>() 
 
-  const makeArcanist = (): Arcanist => {
-    const factory = getArcanistFactoryFromContext(context)
-    return factory.make()
-  }
+  const selectPath = useCallback((path: ArcanistPathName) => {
+    setPath(path)
+    setMageSpell(undefined)
+    setWizardFocus(undefined)
+    setSorcererLineage(undefined)
+    setSorcererLineageDraconicDamageType(undefined)
+    setSorcererLineageFaerieExtraSpell(undefined)
+    setSorcererLineageRedAttribute(undefined)
+    setSorcererLineageRedExtraPower(undefined)
+  }, []);
 
-  const createSubmitAction = (arcanist: Arcanist) => {
-    const serializer = new ArcanistSerializer(arcanist)
-    const serialized = serializer.serialize()
-    return submitRole(serialized)
-  }
+  const selectSorcererLineage = useCallback((lineage: ArcanistLineageType) => {
+    setSorcererLineage(lineage)
+    setSorcererLineageDraconicDamageType(undefined)
+    setSorcererLineageFaerieExtraSpell(undefined)
+    setSorcererLineageRedAttribute(undefined)
+    setSorcererLineageRedExtraPower(undefined)
+  }, [])
 
-  const confirmArcanist = () => {
-    confirmRole(makeArcanist, createSubmitAction)
-  } 
+  const updateSkillGroup = useCallback((skillGroup: SkillName[], groupIndex: number) => {
+    const updated  = updateItemByIndex(skillsByGroup, skillGroup, groupIndex)
+    setSkillsByGroup(updated)
+  }, [skillsByGroup]) 
 
   return {
-    confirmArcanist,
+    initialSpells,
+    path,
+    skillsByGroup,
+    mageSpell,
+    sorcererLineage,
+    sorcererLineageDraconicDamageType,
+    sorcererLineageFaerieExtraSpell,
+    sorcererLineageRedAttribute,
+    sorcererLineageRedExtraPower,
+    wizardFocus,
+    setInitialSpells,
+    setMageSpell,
+    setSorcererLineage,
+    setSorcererLineageDraconicDamageType,
+    setSorcererLineageFaerieExtraSpell,
+    setSorcererLineageRedAttribute,
+    setSorcererLineageRedExtraPower,
+    setWizardFocus,
+    updateSkillGroup,
+    selectPath,
+    selectSorcererLineage,
   }
-};
+}

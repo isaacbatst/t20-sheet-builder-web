@@ -2,7 +2,7 @@ import React from 'react'
 import ConfirmButton from '../../../ConfirmButton'
 import { ConfirmFunction } from '../../../useSheetBuilderSubmit'
 import { Role } from 't20-sheet-builder/build/domain/entities/Role/Role'
-import { useConfirmArcanist } from './useArcanistForm'
+import { useConfirmArcanist } from './useConfirmArcanist'
 
 type Props = {
   confirmRole: ConfirmFunction<Role>

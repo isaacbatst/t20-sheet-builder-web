@@ -1,9 +1,9 @@
 import { ArcanisPathWizardFocusName, ArcanistPathWizardFocuses, Translator } from 't20-sheet-builder'
 import SheetBuilderFormSelect from '../../../../SheetBuilderFormSelect'
-import { selectWizardFocus, useArcanistContextDispatch } from '../SheetBuilderFormRoleDefinitionArcanistContext'
+import { useArcanistFormContext } from '../SheetBuilderFormRoleDefinitionArcanistContext'
 
 const SheetBuilderFormRoleDefinitionArcanistWizard = () => {
-  const dispatch = useArcanistContextDispatch()
+  const {setWizardFocus} = useArcanistFormContext()
   return (
     <div>
       <p>Você lança magias através de uma foco</p>
@@ -12,7 +12,7 @@ const SheetBuilderFormRoleDefinitionArcanistWizard = () => {
           value: focus.equipmentName as ArcanisPathWizardFocusName,
           label: Translator.getEquipmentTranslation(focus.equipmentName)
         }))}
-        onChange={(option) => dispatch(selectWizardFocus(option?.value))}
+        onChange={(option) => setWizardFocus(option?.value)}
         className='mb-3'
         placeholder='Escolha um foco'
         id='arcanist-wizard-focus-select'

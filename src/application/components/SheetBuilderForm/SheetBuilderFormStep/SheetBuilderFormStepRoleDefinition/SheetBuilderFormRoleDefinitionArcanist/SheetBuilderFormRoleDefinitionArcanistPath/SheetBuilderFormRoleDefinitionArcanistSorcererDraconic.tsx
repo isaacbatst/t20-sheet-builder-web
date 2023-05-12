@@ -3,8 +3,8 @@ import { useAppSelector } from '@/application/store/hooks'
 import { selectAttribute } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceInitialAttributes'
 import { Option } from '@/domain/entities/Option'
 import { ArcanistLineageDraconicDamageType, DamageType, Translator } from 't20-sheet-builder'
-import { selectSorcererLineageDraconicDamageType, useArcanistContextDispatch } from '../SheetBuilderFormRoleDefinitionArcanistContext'
 import { addSign } from '@/application/common/StringHelper'
+import { useArcanistFormContext } from '../SheetBuilderFormRoleDefinitionArcanistContext'
 
 const damageOptions: Option<ArcanistLineageDraconicDamageType>[] = [
   {
@@ -26,7 +26,7 @@ const damageOptions: Option<ArcanistLineageDraconicDamageType>[] = [
 ]
 const SheetBuilderFormRoleDefinitionArcanistSorcererDraconic = () => {
   const charisma = useAppSelector(selectAttribute('charisma'))
-  const dispatch = useArcanistContextDispatch()
+  const {setSorcererLineageDraconicDamageType} = useArcanistFormContext()
   return (
     <div className='mb-3'>
       <ul className='mb-3'>
@@ -37,7 +37,7 @@ const SheetBuilderFormRoleDefinitionArcanistSorcererDraconic = () => {
         id='arcanist-sorcerer-draconic-damage-type'
         options={damageOptions}
         placeholder='Escolha um tipo de dano'
-        onChange={(option) => dispatch(selectSorcererLineageDraconicDamageType(option?.value))}
+        onChange={(option) => setSorcererLineageDraconicDamageType(option?.value)}
       />
     </div>
   )

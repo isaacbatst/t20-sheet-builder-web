@@ -1,10 +1,9 @@
-import { makeArcanistFromSerialized } from "@/application/common/roles/Arcanist";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import SheetBuilder, { BuildingSheet, Dwarf, Human, OutOfGameContext, RaceInterface, RaceName, RoleInterface, RoleName, SheetSerializer, VersatileChoiceFactory, Warrior } from "t20-sheet-builder";
+import SheetBuilder, { BuildingSheet, Dwarf, Human, OutOfGameContext, RaceInterface, RaceName, RoleFactory, SheetSerializer, VersatileChoiceFactory } from "t20-sheet-builder";
 import { AppStartListening } from "../..";
 import { takeLatest } from "../../sagas";
 import { updatePreview } from "./sheetBuilderSliceSheetPreview";
-import { SheetBuilderStateRace, SheetBuilderStateRole } from "./types";
+import { SheetBuilderStateRace } from "./types";
 
 export const sheetBuilderMiddleware = createListenerMiddleware()
 
@@ -19,7 +18,6 @@ startListening({
       return false
     }
     const shouldTrigger = isSheetBuilderAction(action.type) && isNotUpdatePreviewAction(action.type)
-    console.log(shouldTrigger)
     return shouldTrigger
   },
   effect: async (action, api) => {
@@ -47,7 +45,7 @@ startListening({
       return
     }
 
-    const role = makeRole(serializedRole)
+    const role = RoleFactory.makeFromSerialized(serializedRole)
     roleStep.chooseRole(role)
     api.dispatch(updatePreview(serializer.serialize(sheet)))
   }
@@ -65,17 +63,4 @@ function makeRace(serializedRace: SheetBuilderStateRace): RaceInterface {
   }
 
   throw new Error(`UNKNOWN_RACE`)
-}
-
-function makeRole(serializedRole: SheetBuilderStateRole): RoleInterface {
-  if(serializedRole.name === RoleName.warrior){
-    return new Warrior(serializedRole.chosenSkills)
-  }
-
-  
-  if(serializedRole.name === RoleName.arcanist){
-    return makeArcanistFromSerialized(serializedRole)
-  }
-
-  throw new Error(`UNKNOWN_ROLE`)
 }
