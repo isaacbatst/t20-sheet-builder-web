@@ -5,7 +5,7 @@ type Props = {
   value: number;
 }
 
-const SheetPreviewPointItem = ({label, value}: Props) => {
+const SheetPreviewItem = ({label, value}: Props) => {
   return (
     <div className='flex flex-col'>
       <label htmlFor="" className='text-xs mb-2'>{label}</label>
@@ -14,4 +14,4 @@ const SheetPreviewPointItem = ({label, value}: Props) => {
   )
 }
 
-export default SheetPreviewPointItem
+export default SheetPreviewItem

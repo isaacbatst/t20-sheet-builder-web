@@ -29,5 +29,6 @@ export const selectPreviewAttributes = (state: RootState) => state.sheetBuilder.
 export const selectPreviewBuildSteps = (state: RootState) => state.sheetBuilder.sheet.preview.buildSteps
 export const selectMaxLifePoints = (state: RootState) => state.sheetBuilder.sheet.preview.lifePoints.max
 export const selectMaxManaPoints = (state: RootState) => state.sheetBuilder.sheet.preview.manaPoints.max
+export const selectDefense = (state: RootState) => state.sheetBuilder.sheet.preview.defense
 
 export default sheetBuilderSliceSheetPreview
