@@ -25,6 +25,7 @@ export const sheetBuilderSliceSheetPreview = createSlice({
 
 export const { updatePreview } = sheetBuilderSliceSheetPreview.actions
 
-export const selectPreview = (state: RootState) => state.sheetBuilder.sheet.preview
+export const selectPreviewAttributes = (state: RootState) => state.sheetBuilder.sheet.preview.attributes
+export const selectPreviewBuildSteps = (state: RootState) => state.sheetBuilder.sheet.preview.buildSteps
 
 export default sheetBuilderSliceSheetPreview
