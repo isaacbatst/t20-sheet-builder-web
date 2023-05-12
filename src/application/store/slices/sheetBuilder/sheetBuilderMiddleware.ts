@@ -11,7 +11,6 @@ export const sheetBuilderMiddleware = createListenerMiddleware()
 const startListening = sheetBuilderMiddleware.startListening as AppStartListening
 
 const isSheetBuilderAction = (type: string) => type.startsWith('sheetBuilder/')
-const isNotUpdatePreviewAction = (type: string) => type !== 'sheetBuilder/updatePreview';
 
 startListening({
   predicate(action) {

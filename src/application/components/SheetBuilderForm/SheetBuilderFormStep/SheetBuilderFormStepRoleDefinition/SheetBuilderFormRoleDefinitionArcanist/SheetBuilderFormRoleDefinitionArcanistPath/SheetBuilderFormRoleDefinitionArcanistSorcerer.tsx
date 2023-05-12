@@ -1,10 +1,10 @@
 import React from "react"
 import SheetBuilderFormSelect from "../../../../SheetBuilderFormSelect"
-import { selectSorcererLineage, useArcanistFormContext, useArcanistContextDispatch } from "../SheetBuilderFormRoleDefinitionArcanistContext"
 import { ArcanistLineageType } from "t20-sheet-builder"
 import SheetBuilderFormRoleDefinitionArcanistSorcererDraconic from "./SheetBuilderFormRoleDefinitionArcanistSorcererDraconic"
 import SheetBuilderFormRoleDefinitionArcanistSorcererFaerie from "./SheetBuilderFormRoleDefinitionArcanistSorcererFaerie"
 import SheetBuilderFormRoleDefinitionArcanistSorcererRed from "./SheetBuilderFormRoleDefinitionArcanistSorcererRed"
+import { useArcanistFormContext } from "../SheetBuilderFormRoleDefinitionArcanistContext"
 
 const lineageTranslations: Record<ArcanistLineageType, string> = {
   draconic: 'Dracônica',
@@ -19,8 +19,7 @@ const lineageComponents: Record<ArcanistLineageType, React.FC> = {
 }
 
 const SheetBuilderFormRoleDefinitionArcanistSorcerer = () => {
-  const dispatch = useArcanistContextDispatch()
-  const {sorcererLineage} = useArcanistFormContext()
+  const {sorcererLineage, setSorcererLineage} = useArcanistFormContext()
   const LineageComponent = sorcererLineage ? lineageComponents[sorcererLineage] : null
   return <div>
     <p>Você possui uma linhagem sobrenatural</p>
@@ -29,7 +28,7 @@ const SheetBuilderFormRoleDefinitionArcanistSorcerer = () => {
         value: lineage,
         label: lineageTranslations[lineage]
       }))}
-      onChange={(option) => dispatch(selectSorcererLineage(option?.value))}
+      onChange={(option) => setSorcererLineage(option?.value)}
       className='mb-3'
       placeholder='Escolha uma linhagem'
       id="arcanist-sorcerer-lineage-select"

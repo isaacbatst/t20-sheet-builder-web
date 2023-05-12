@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Attribute } from 't20-sheet-builder'
 import { RootState } from '../..'
 
 export type SheetBuilderFormState = {
