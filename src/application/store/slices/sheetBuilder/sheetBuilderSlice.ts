@@ -3,10 +3,12 @@ import sheetBuilderSliceInitialAttributes from "./sheetBuilderSliceInitialAttrib
 import sheetBuilderSliceRaceDefinition from "./sheetBuilderSliceRaceDefinition";
 import sheetBuilderSliceRoleDefinition from "./sheetBuilderSliceRoleDefinition";
 import sheetBuilderSliceSheetPreview from "./sheetBuilderSliceSheetPreview";
+import sheetBuilderSliceForm from "./sheetBuilderSliceForm";
 
 export const sheetBuilderReducer = combineReducers({
   initialAttributes: sheetBuilderSliceInitialAttributes.reducer,
   race: sheetBuilderSliceRaceDefinition.reducer,
   role: sheetBuilderSliceRoleDefinition.reducer,
-  sheet: sheetBuilderSliceSheetPreview.reducer
+  sheet: sheetBuilderSliceSheetPreview.reducer,
+  form: sheetBuilderSliceForm.reducer
 })

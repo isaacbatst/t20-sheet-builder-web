@@ -26,6 +26,7 @@ export const useSheetBuilderConfirm = <Type, >() => {
       const entity = make();
       const action = createSubmitAction(entity)
       dispatch(action)
+      console.log('depois dispatch')
       setSuccess(true)
     } catch (err) {
       if(err instanceof Error) {
