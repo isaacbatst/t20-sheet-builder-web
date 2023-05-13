@@ -1,10 +1,10 @@
-import React from 'react'
+import { selectPreviewAttributes, selectPreviewDefense, selectPreviewLevel, selectPreviewProficiencies, selectPreviewRaceName, selectPreviewRoleName, selectPreviewSkills } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
+import { useSelector } from 'react-redux'
+import { Translator } from 't20-sheet-builder'
 import SheetPreviewAttributes from './SheetPreviewAttributes'
 import SheetPreviewDefense from './SheetPreviewDefense'
 import SheetPreviewPoints from './SheetPreviewPoints'
-import { selectPreviewAttributes, selectPreviewDefense, selectPreviewRaceName, selectPreviewRoleName, selectPreviewLevel, selectPreviewProficiencies } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
-import { useSelector } from 'react-redux'
-import { Translator } from 't20-sheet-builder'
+import SheetPreviewSkills from './SheetPreviewSkills'
 
 const SheetPreviewStats = () => {
   const attributes = useSelector(selectPreviewAttributes)
@@ -13,6 +13,7 @@ const SheetPreviewStats = () => {
   const roleName = useSelector(selectPreviewRoleName)
   const level = useSelector(selectPreviewLevel)
   const proficiencies = useSelector(selectPreviewProficiencies)
+  const skills = useSelector(selectPreviewSkills)
   
   const getTitle = () => {
     if(raceName && roleName) {
@@ -34,9 +35,10 @@ const SheetPreviewStats = () => {
       <SheetPreviewPoints />
       <SheetPreviewAttributes attributes={attributes} />
       <SheetPreviewDefense defense={defense} attributes={attributes} />
-      <div>
+      <div className='mb-6'>
         <p>Proficiências: {proficiencies.map(Translator.getProficiencyTranslation).join(', ')}.</p>
       </div>
+      <SheetPreviewSkills attributes={attributes} skills={skills} />
     </div>
   )
 }
