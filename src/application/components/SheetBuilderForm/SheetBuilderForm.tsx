@@ -9,7 +9,7 @@ import SheetBuilderFormStepRoleDefinition from "./SheetBuilderFormStep/SheetBuil
 
 const SheetBuilderForm = () => {
   return (
-    <Tabs forceRenderTabPanel>
+    <Tabs forceRenderTabPanel className='py-8'>
       <TabList>
         <Tab>1 - Atributos Iniciais</Tab>
         <Tab>2 - Raça</Tab>
@@ -19,7 +19,7 @@ const SheetBuilderForm = () => {
         <Tab>6 - Equipamento</Tab>
       </TabList>
 
-      <section className="container mx-auto">
+      <section className="container mx-auto py-8">
         <TabPanel>
           <SheetBuilderFormStepAttributesDefinition />
         </TabPanel>

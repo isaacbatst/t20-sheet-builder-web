@@ -26,7 +26,7 @@ export default function Home() {
           isShowingPreview={isShowingPreview}
           togglePreview={togglePreview}
         />
-        <div className='pt-8'>
+        <div>
           <div className={isShowingPreview ? '' : 'hidden'	}>
             <SheetPreview />
           </div>

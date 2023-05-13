@@ -11,17 +11,19 @@ const SheetPreview = () => {
   const defense = useSelector(selectDefense)
   
   return (
-    <div className='flex flex-col md:flex-row'>
+    <div className='flex flex-col md:flex-row py-8'>
       <div  className='flex-1'>
         <h2 className='mb-3'>Ficha</h2>
         <SheetPreviewPoints />
         <SheetPreviewAttributes attributes={attributes} />
         <SheetPreviewDefense defense={defense} attributes={attributes} />
       </div>
-      {buildSteps.length > 0 && <div  className='flex-1'>
-        <h3 className='mb-3'>Passo a passo</h3>
-        <SheetPreviewBuildSteps buildSteps={buildSteps} />
-      </div>}
+      {buildSteps.length > 0 && (
+        <div className='flex-1 py-8'>
+          <h3 className='mb-3'>Passo a passo</h3>
+          <SheetPreviewBuildSteps buildSteps={buildSteps} />
+        </div>
+      )}
     </div>
   )
 }
