@@ -9,7 +9,7 @@ type Props = {
 
 const SheetPreviewDefense = ({defense, attributes}: Props) => {
   return (
-    <div className='flex gap-3 justify-center'>
+    <div className='flex gap-3 justify-center mb-6'>
       <SheetPreviewItem label='Defesa' value={defense.total} />
       <div className='flex gap-2 items-center'>
         <p>= 10 +</p>

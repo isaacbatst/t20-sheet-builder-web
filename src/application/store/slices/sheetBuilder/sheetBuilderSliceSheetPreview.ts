@@ -27,11 +27,12 @@ export const { updatePreview } = sheetBuilderSliceSheetPreview.actions
 
 export const selectPreviewAttributes = (state: RootState) => state.sheetBuilder.sheet.preview.attributes
 export const selectPreviewBuildSteps = (state: RootState) => state.sheetBuilder.sheet.preview.buildSteps
-export const selectMaxLifePoints = (state: RootState) => state.sheetBuilder.sheet.preview.lifePoints.max
-export const selectMaxManaPoints = (state: RootState) => state.sheetBuilder.sheet.preview.manaPoints.max
-export const selectDefense = (state: RootState) => state.sheetBuilder.sheet.preview.defense
-export const selectRaceName = (state: RootState) => state.sheetBuilder.sheet.preview.race?.name
-export const selectRoleName = (state: RootState) => state.sheetBuilder.sheet.preview.role?.name
-export const selectLevel = (state: RootState) => state.sheetBuilder.sheet.preview.level
+export const selectPreviewMaxLifePoints = (state: RootState) => state.sheetBuilder.sheet.preview.lifePoints.max
+export const selectPreviewMaxManaPoints = (state: RootState) => state.sheetBuilder.sheet.preview.manaPoints.max
+export const selectPreviewDefense = (state: RootState) => state.sheetBuilder.sheet.preview.defense
+export const selectPreviewRaceName = (state: RootState) => state.sheetBuilder.sheet.preview.race?.name
+export const selectPreviewRoleName = (state: RootState) => state.sheetBuilder.sheet.preview.role?.name
+export const selectPreviewLevel = (state: RootState) => state.sheetBuilder.sheet.preview.level
+export const selectPreviewProficiencies = (state: RootState) => state.sheetBuilder.sheet.preview.proficiencies
 
 export default sheetBuilderSliceSheetPreview
