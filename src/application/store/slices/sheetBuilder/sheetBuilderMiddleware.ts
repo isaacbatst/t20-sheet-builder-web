@@ -4,7 +4,10 @@ import { AppStartListening } from "../..";
 import { takeLatest } from "../../sagas";
 import { updatePreview } from "./sheetBuilderSliceSheetPreview";
 import { SheetBuilderStateRace } from "./types";
-import { resetFormError, setFormError } from "./sheetBuilderSliceForm";
+import { resetFormAlert, setFormError, setFormSuccess } from "./sheetBuilderSliceForm";
+import { incrementAttribute } from "./sheetBuilderSliceInitialAttributes";
+import { resetRace } from "./sheetBuilderSliceRaceDefinition";
+import { resetRole } from "./sheetBuilderSliceRoleDefinition";
 
 export const sheetBuilderMiddleware = createListenerMiddleware()
 
@@ -17,12 +20,13 @@ startListening({
     if(typeof action.type !== 'string'){
       return false
     }
-    const shouldTrigger = isSheetBuilderAction(action.type) && !isAnyOf(updatePreview, setFormError, resetFormError)(action)
+    const shouldTrigger = isSheetBuilderAction(action.type) 
+      && !isAnyOf(updatePreview, setFormError, resetFormAlert, setFormSuccess)(action)
     return shouldTrigger
   },
   effect: async (action, api) => {
     try {
-      api.dispatch(resetFormError())
+      api.dispatch(resetFormAlert())
       await takeLatest(api)
 
       const {initialAttributes, race: {race: serializedRace}, role: {role: serializedRole}} = api.getState().sheetBuilder
@@ -34,28 +38,25 @@ startListening({
       const raceStep = sheetBuilder
         .setInitialAttributes(initialAttributes)
 
-      if(!serializedRace) {
-        api.dispatch(updatePreview(serializer.serialize(sheet)))
-        return
+      if(serializedRace) {
+        const race = makeRace(serializedRace)
+        const roleStep = raceStep.chooseRace(race)
+        
+        if(serializedRole) {
+          const role = RoleFactory.makeFromSerialized(serializedRole)
+          roleStep.chooseRole(role)
+        }
       }
 
-      const race = makeRace(serializedRace)
-      const roleStep = raceStep.chooseRace(race)
-
-      if(!serializedRole) {
-        api.dispatch(updatePreview(serializer.serialize(sheet)))
-        return
-      }
-
-      const role = RoleFactory.makeFromSerialized(serializedRole)
-      roleStep.chooseRole(role)
       api.dispatch(updatePreview(serializer.serialize(sheet)))
+ 
+      if(!isAnyOf(incrementAttribute, resetRace, resetRole)(action)) {
+        api.dispatch(setFormSuccess('Ficha atualizada: ' + action.type))
+      }
     } catch (err) {
       if(err instanceof SheetBuilderError) {
         api.dispatch(setFormError(err.message))
       }
-      
-      console.error(err)
     }
   }
 })

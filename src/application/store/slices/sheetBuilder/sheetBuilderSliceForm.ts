@@ -2,11 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../..'
 
 export type SheetBuilderFormState = {
-  error: string | undefined
+  alert?: { 
+    message: string,
+    type: 'error' | 'success'
+  } 
 }
 
 const initialState: SheetBuilderFormState = {
-  error: undefined,
+  alert: undefined
 }
 
 export const sheetBuilderSliceForm = createSlice({
@@ -14,16 +17,25 @@ export const sheetBuilderSliceForm = createSlice({
   initialState,
   reducers: {
     setFormError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload
+      state.alert = {
+        message: action.payload,
+        type: 'error'
+      }
     },
-    resetFormError: (state) => {
-      state.error = undefined
+    setFormSuccess: (state, action : PayloadAction<string>) => {
+      state.alert = {
+        message: action.payload,
+        type: 'success'
+      }
+    },
+    resetFormAlert: (state) => {
+      state.alert = undefined
     },
   }
 })
 
-export const { resetFormError, setFormError } = sheetBuilderSliceForm.actions
+export const { setFormError, resetFormAlert, setFormSuccess } = sheetBuilderSliceForm.actions
 
-export const selectFormError = (state: RootState) => state.sheetBuilder.form.error
+export const selectFormAlert = (state: RootState) => state.sheetBuilder.form.alert
 
 export default sheetBuilderSliceForm

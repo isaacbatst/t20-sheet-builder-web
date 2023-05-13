@@ -1,11 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@/application/store/hooks'
+import { resetFormAlert } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceForm'
 import { selectAttributes } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceInitialAttributes'
 import { resetRace } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRaceDefinition'
 import React, { useMemo } from 'react'
 import { Attribute, Attributes, RaceName, Races } from 't20-sheet-builder'
 import { Race } from 't20-sheet-builder/build/domain/entities/Race/Race'
-import SheetBuilderFormAlertError from '../../SheetBuilderFormAlertError'
-import SheetBuilderFormAlertSuccess from '../../SheetBuilderFormAlertSuccess'
 import { ConfirmFunction, useSheetBuilderConfirm } from '../../useSheetBuilderSubmit'
 import { AttributePreview } from './AttributePreview'
 import RacesSelect from './RacesSelect'
@@ -27,7 +26,7 @@ const raceComponents: Record<RaceName, React.FC<RaceComponentProps>> = {
 const SheetBuilderFormStepRaceDefinition = () => {
   const [race, setRace] = React.useState<RaceName>()
   const [attributeModifiers, setAttributeModifiers] = React.useState<Partial<Attributes>>({})
-  const {confirm, reset, error,success} = useSheetBuilderConfirm<Race>()
+  const {confirm} = useSheetBuilderConfirm<Race>()
   const dispatch = useAppDispatch()
 
   const attributes = useAppSelector(selectAttributes)
@@ -46,9 +45,9 @@ const SheetBuilderFormStepRaceDefinition = () => {
   }, [attributes, attributeModifiers]);
 
   const resetState = () => {
-    reset();
-    setAttributeModifiers({})
+    dispatch(resetFormAlert())
     dispatch(resetRace())
+    setAttributeModifiers({})
   }
 
   const changeRace = (race?: RaceName) => {
@@ -59,7 +58,6 @@ const SheetBuilderFormStepRaceDefinition = () => {
       const RaceClass = Races.getByName(race)
       setAttributeModifiers(RaceClass.attributeModifiers)
     }
-
   }  
   const RaceComponent = race ? raceComponents[race] : null
   return (
@@ -70,8 +68,6 @@ const SheetBuilderFormStepRaceDefinition = () => {
         confirmRace={confirm}
         attributesPreview={attributesPreview}
       />}
-      {error && <SheetBuilderFormAlertError error={error} />}
-      {success && <SheetBuilderFormAlertSuccess message='Raça salva com sucesso' />}
     </section>
   )
 }

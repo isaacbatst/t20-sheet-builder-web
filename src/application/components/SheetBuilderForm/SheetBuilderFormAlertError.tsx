@@ -1,10 +1,10 @@
 import React from 'react'
 
 type Props = {
-  error: string
+  message: string
 }
 
-const SheetBuilderFormAlertError = ({error}: Props) => {
+const SheetBuilderFormAlertError = ({message: error}: Props) => {
   return (
     <div 
       className='bg-red-100 border border-red-400 text-red-700 

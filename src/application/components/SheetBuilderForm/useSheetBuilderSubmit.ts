@@ -1,6 +1,8 @@
 import { useAppDispatch } from "@/application/store/hooks"
+import { setFormError } from "@/application/store/slices/sheetBuilder/sheetBuilderSliceForm"
 import { PayloadAction } from "@reduxjs/toolkit"
-import { useCallback, useState } from "react"
+import { useCallback } from "react"
+import { SheetBuilderError } from "t20-sheet-builder"
 
 export type ConfirmFunction<Type> = <
   Entity extends Type, 
@@ -11,36 +13,22 @@ export type ConfirmFunction<Type> = <
 
 export const useSheetBuilderConfirm = <Type, >() => {
   const dispatch = useAppDispatch()
-  const [error, setError] = useState<string>()
-  const [success, setSuccess] = useState<boolean>(false)
-
-  const reset = () => {
-    setError(undefined)
-    setSuccess(false)
-  }
 
   const confirm: ConfirmFunction<Type> = useCallback((make, createSubmitAction) => {
     try {
-      setSuccess(false)
-      setError(undefined)
       const entity = make();
       const action = createSubmitAction(entity)
       dispatch(action)
-      console.log('depois dispatch')
-      setSuccess(true)
     } catch (err) {
-      if(err instanceof Error) {
-        return setError(err.message)
+      if(err instanceof SheetBuilderError) {
+        return dispatch(setFormError(err.message))  
       }
 
-      setError('UNKNOWN_ERROR')
+      dispatch(setFormError('UNKNOWN_ERROR'))
     }
   }, [dispatch])
 
   return {
-    error,
-    success,
-    reset,
     confirm
   }
 }

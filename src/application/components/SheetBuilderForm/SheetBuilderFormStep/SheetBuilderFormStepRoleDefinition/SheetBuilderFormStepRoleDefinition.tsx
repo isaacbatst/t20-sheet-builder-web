@@ -1,14 +1,13 @@
+import { useAppDispatch } from '@/application/store/hooks'
+import { resetFormAlert } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceForm'
+import { resetRole } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRoleDefinition'
 import React from 'react'
 import { RoleName } from 't20-sheet-builder'
+import { Role } from 't20-sheet-builder/build/domain/entities/Role/Role'
+import { ConfirmFunction, useSheetBuilderConfirm } from '../../useSheetBuilderSubmit'
 import RoleSelect from './RoleSelect'
 import SheetBuilderFormRoleDefinitionArcanist from './SheetBuilderFormRoleDefinitionArcanist/SheetBuilderFormRoleDefinitionArcanist'
 import SheetBuilderFormRoleDefinitionWarrior from './SheetBuilderFormRoleDefinitionWarrior/SheetBuilderFormRoleDefinitionWarrior'
-import { ConfirmFunction, useSheetBuilderConfirm } from '../../useSheetBuilderSubmit'
-import SheetBuilderFormAlertError from '../../SheetBuilderFormAlertError'
-import SheetBuilderFormAlertSuccess from '../../SheetBuilderFormAlertSuccess'
-import { Role } from 't20-sheet-builder/build/domain/entities/Role/Role'
-import { useAppDispatch } from '@/application/store/hooks'
-import { resetRole } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceRoleDefinition'
 
 export type RoleComponentProps = {
   confirmRole: ConfirmFunction<Role>
@@ -20,13 +19,13 @@ const roleComponents: Record<RoleName, React.FC<RoleComponentProps>> = {
 }
 
 const SheetBuilderFormStepRoleDefinition = () => {
-  const {confirm, reset, success, error} = useSheetBuilderConfirm<Role>()
+  const {confirm} = useSheetBuilderConfirm<Role>()
   const dispatch = useAppDispatch()
   const [role, setRole] = React.useState<RoleName>()
   const RoleComponent = role ? roleComponents[role] : null;
 
   const selectRole = (selected: RoleName) => {
-    reset()
+    dispatch(resetFormAlert())
     dispatch(resetRole())
     setRole(selected)
   }
@@ -37,8 +36,6 @@ const SheetBuilderFormStepRoleDefinition = () => {
       {RoleComponent && <RoleComponent 
         confirmRole={confirm}
       />}
-      {error && <SheetBuilderFormAlertError error={error} />}
-      {success && <SheetBuilderFormAlertSuccess message='Classe salva com sucesso' />}
     </div>
   )
 }
