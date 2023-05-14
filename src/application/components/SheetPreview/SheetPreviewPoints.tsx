@@ -1,5 +1,5 @@
 import React from 'react'
-import SheetPreviewItem from './SheetPreviewItem'
+import SheetPreviewItem from './SheetPreviewValueItem'
 import { useSelector } from 'react-redux'
 import { selectPreviewMaxLifePoints, selectPreviewMaxManaPoints } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
 

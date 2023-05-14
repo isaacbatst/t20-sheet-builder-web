@@ -1,6 +1,6 @@
 import React from 'react'
 import { Attributes, SerializedSheetDefense, Translator } from 't20-sheet-builder'
-import SheetPreviewItem from './SheetPreviewItem'
+import SheetPreviewItem from './SheetPreviewValueItem'
 
 type Props = {
   defense: SerializedSheetDefense,

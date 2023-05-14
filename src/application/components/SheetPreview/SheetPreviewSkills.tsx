@@ -1,7 +1,7 @@
 import { selectPreviewAttributes, selectPreviewSkills } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
 import { useSelector } from 'react-redux'
 import { SkillName, Translator } from 't20-sheet-builder'
-import SheetPreviewItem from './SheetPreviewItem'
+import SheetPreviewItem from './SheetPreviewValueItem'
 
 const SheetPreviewSkills = () => {
   const skills = useSelector(selectPreviewSkills)
