@@ -15,7 +15,7 @@ const SheetPreviewAttributes = ({attributes}: Props) => {
             <p className='text-xs mb-2'>
               {Translator.getAttributeTranslation(attribute as Attribute)}
             </p>
-            <p className='bg-white text-slate-900 rounded-2xl px-3 py-2 mb-1'>{addSign(value)}</p>
+            <p className='bg-white text-slate-900 rounded-2xl px-3 py-1 md:py-2 mb-1'>{addSign(value)}</p>
           </li>
         ))}
       </ul>

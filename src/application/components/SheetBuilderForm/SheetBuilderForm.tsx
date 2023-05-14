@@ -19,7 +19,7 @@ const SheetBuilderForm = () => {
   }
 
   return (
-    <div>
+    <div className='py-2'>
       <Tabs forceRenderTabPanel onSelect={onChangeTab}>
         <TabList>
           <Tab>1 - Atributos Iniciais</Tab>

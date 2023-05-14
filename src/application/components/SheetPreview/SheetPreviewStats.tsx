@@ -34,7 +34,10 @@ const SheetPreviewStats = () => {
       <SheetPreviewAttributes attributes={attributes} />
       <SheetPreviewDefense defense={defense} attributes={attributes} />
       <div className='mb-6'>
-        <p>Proficiências: {proficiencies.map(Translator.getProficiencyTranslation).join(', ')}.</p>
+        <p className='font-light'>
+          <strong className='font-bold'>Proficiências</strong>: {' '}
+          {proficiencies.map(Translator.getProficiencyTranslation).join(', ')}.
+        </p>
       </div>
     </div>
   )

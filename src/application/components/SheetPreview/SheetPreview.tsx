@@ -9,8 +9,8 @@ const SheetPreview = () => {
   const buildSteps = useSelector(selectPreviewBuildSteps)
 
   return (
-    <div className='flex flex-col md:flex-row justify-center py-8'>
-      <Tabs>
+    <div className='flex flex-col md:flex-row justify-center py-2'>
+      <Tabs className='flex-1'>
         <TabList>
           <Tab>Básico</Tab>
           <Tab>Perícias</Tab>
