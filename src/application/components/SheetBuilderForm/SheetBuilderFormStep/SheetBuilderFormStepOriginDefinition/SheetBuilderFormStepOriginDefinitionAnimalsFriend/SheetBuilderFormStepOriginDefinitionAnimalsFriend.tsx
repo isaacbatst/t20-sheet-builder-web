@@ -1,12 +1,10 @@
 import React from 'react'
+import { OriginComponentType } from '../SheetBuilderFormStepOriginDefinition'
 
-type Props = {
-  benefits: JSX.Element
-}
-const SheetBuilderFormStepOriginDefinitionAnimalsFriend = ({benefits}: Props) => {
+const SheetBuilderFormStepOriginDefinitionAnimalsFriend: OriginComponentType = ({benefitsSelect}) => {
   return (
     <div>
-      {benefits}
+      {benefitsSelect}
     </div>
   )
 }

@@ -2836,10 +2836,10 @@ synckit@^0.8.5:
     "@pkgr/utils" "^2.3.1"
     tslib "^2.5.0"
 
-t20-sheet-builder@^1.3.68:
-  version "1.3.68"
-  resolved "https://registry.yarnpkg.com/t20-sheet-builder/-/t20-sheet-builder-1.3.68.tgz#c43d8ec1008ee44ec0575af9d327237ec301598f"
-  integrity sha512-7NlUl/lEThRhWaF4SPvQwHHMbIDkx7e4s1P+jz6YApNp0TOA9vCgRL3y5fQ++7LXUwS4cNc9Zx5WqbnmQmc1uA==
+t20-sheet-builder@^1.3.71:
+  version "1.3.71"
+  resolved "https://registry.yarnpkg.com/t20-sheet-builder/-/t20-sheet-builder-1.3.71.tgz#608b42b6e485172929a55b6db5097d050af3d577"
+  integrity sha512-Q2/n1ulnzGtsjznu96sf8/2b0KxtTUPcQLzBfJpxKQYiP0OXK0v6ilWjnty/t2mU3YeWQ7FwFp/gzvdICS1UNA==
 
 tailwindcss@3.3.2:
   version "3.3.2"

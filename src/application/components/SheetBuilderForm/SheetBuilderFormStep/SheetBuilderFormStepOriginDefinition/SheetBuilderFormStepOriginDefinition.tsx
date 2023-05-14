@@ -1,13 +1,28 @@
 import React from 'react'
-import { Acolyte, AnimalsFriend, GeneralPowerName, OriginName, OriginPowerName, OriginStatic, SkillName } from 't20-sheet-builder'
+import { GeneralPowerName, Origin, OriginBenefits, OriginName, OriginPowerName, Origins, SkillName } from 't20-sheet-builder'
+import { ConfirmFunction, useSheetBuilderConfirm } from '../../useSheetBuilderSubmit'
 import OriginBenefitsSelect from './OriginBenefitsSelect'
 import OriginEquipments from './OriginEquipments'
 import OriginSelect from './OriginSelect'
 import SheetBuilderFormStepOriginDefinitionAcolyte from './SheetBuilderFormStepOriginDefinitionAcolyte/SheetBuilderFormStepOriginDefinitionAcolyte'
 import SheetBuilderFormStepOriginDefinitionAnimalsFriend from './SheetBuilderFormStepOriginDefinitionAnimalsFriend/SheetBuilderFormStepOriginDefinitionAnimalsFriend'
 
-type OriginComponentType = React.FC<{
-  benefits: JSX.Element
+export type OriginBenefitName = OriginPowerName | SkillName | GeneralPowerName
+export type SelectedBenefit = {
+  type: 'skills';
+  name: SkillName
+} | {
+  type: 'generalPowers';
+  name: GeneralPowerName
+} | {
+  type: 'originPower';
+  name: OriginPowerName
+}
+
+export type OriginComponentType = React.FC<{
+  selectedBenefits: SelectedBenefit[]
+  benefitsSelect: JSX.Element
+  confirmOrigin: ConfirmFunction<Origin>
 }>
 
 const originComponents: Record<OriginName, OriginComponentType> = {
@@ -15,31 +30,34 @@ const originComponents: Record<OriginName, OriginComponentType> = {
   [OriginName.animalsFriend]: SheetBuilderFormStepOriginDefinitionAnimalsFriend
 }
 
-const originClasses: Record<OriginName, OriginStatic> = {
-  [OriginName.acolyte]: Acolyte,
-  [OriginName.animalsFriend]: AnimalsFriend
-} 
-
-export type OriginBenefitName = OriginPowerName | SkillName | GeneralPowerName
-
 const SheetBuilderFormStepOriginDefinition = () => {
+  const {confirm} = useSheetBuilderConfirm<Origin>()
   const [origin, setOrigin] = React.useState<OriginName>()
-  const [, setSelectedBenefits] = React.useState<OriginBenefitName[]>([])
+  const [selectedBenefits, setSelectedBenefits] = React.useState<SelectedBenefit[]>([])
   
   const OriginComponent = origin ? originComponents[origin] : null
-  const OriginClass = origin ? originClasses[origin] : null
-  const originEquipments = OriginClass ? OriginClass.equipments : []
-  const originBenefits = OriginClass ? [
-    ...OriginClass.generalPowers, ...OriginClass.skills, OriginClass.originPower
-  ] : []
+  const OriginClass = origin ? Origins.getByName(origin) : null
+  const originEquipments = OriginClass ? OriginClass.equipments : null
+  const originBenefits: OriginBenefits | null = OriginClass ? {
+    generalPowers: OriginClass.generalPowers,
+    skills: OriginClass.skills,
+    originPower: OriginClass.originPower
+  } : null
+
   return (
     <div>
-      <h3>Escolha uma origem</h3>
       <OriginSelect setOrigin={setOrigin} />
-      {OriginClass && OriginComponent && 
-        <OriginComponent benefits={<OriginBenefitsSelect benefits={originBenefits} setBenefits={setSelectedBenefits} />} />
+      {originEquipments && <OriginEquipments equipments={originEquipments} />}
+      {OriginComponent && originBenefits && 
+        <OriginComponent 
+          selectedBenefits={selectedBenefits}
+          confirmOrigin={confirm}
+          benefitsSelect={<OriginBenefitsSelect 
+            benefits={originBenefits} 
+            setBenefits={setSelectedBenefits} 
+          />} 
+        />
       }
-      {originEquipments.length > 0 && <OriginEquipments originEquipments={originEquipments} />}
     </div>
   )
 }
