@@ -5,7 +5,7 @@ import { takeLatest } from "../../sagas";
 import { updatePreview } from "./sheetBuilderSliceSheetPreview";
 import { SheetBuilderStateRace } from "./types";
 import { resetFormAlert, setFormError, setFormSuccess } from "./sheetBuilderSliceForm";
-import { incrementAttribute } from "./sheetBuilderSliceInitialAttributes";
+import { decrementAttribute, incrementAttribute } from "./sheetBuilderSliceInitialAttributes";
 import { resetRace } from "./sheetBuilderSliceRaceDefinition";
 import { resetRole } from "./sheetBuilderSliceRoleDefinition";
 
@@ -49,8 +49,12 @@ startListening({
       }
 
       api.dispatch(updatePreview(serializer.serialize(sheet)))
+
+      const shouldDispatchSuccess = !isAnyOf(
+        incrementAttribute, decrementAttribute, resetRace, resetRole
+      )(action)
  
-      if(!isAnyOf(incrementAttribute, resetRace, resetRole)(action)) {
+      if(shouldDispatchSuccess) {
         api.dispatch(setFormSuccess('Ficha atualizada: ' + action.type))
       }
     } catch (err) {
