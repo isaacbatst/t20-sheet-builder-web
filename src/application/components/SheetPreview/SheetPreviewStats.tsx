@@ -28,17 +28,15 @@ const SheetPreviewStats = () => {
   }
 
   return (
-    <div className='flex-1 px-5 py-2'>
-      <h2 className='mb-6 font-medium'>{getTitle()} Nível {level}</h2>
+    <div className='flex flex-col gap-6'>
+      <h2 className='font-medium'>{getTitle()} Nível {level}</h2>
       <SheetPreviewPoints />
       <SheetPreviewAttributes attributes={attributes} />
       <SheetPreviewDefense defense={defense} attributes={attributes} />
-      <div className='mb-6'>
-        <p className='font-light'>
-          <strong className='font-bold'>Proficiências</strong>: {' '}
-          {proficiencies.map(Translator.getProficiencyTranslation).join(', ')}.
-        </p>
-      </div>
+      <p className='font-light'>
+        <strong className='font-bold'>Proficiências</strong>: {' '}
+        {proficiencies.map(Translator.getProficiencyTranslation).join(', ')}.
+      </p>
     </div>
   )
 }

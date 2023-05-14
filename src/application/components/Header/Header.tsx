@@ -16,8 +16,7 @@ const Header = ({togglePreview, isShowingPreview}: Props) => {
         className='
           p-4 md:p-5
           self-stretch  
-          text-xs
-          uppercase
+          text-sm
           border-l
           border-stone-700
           font-bold

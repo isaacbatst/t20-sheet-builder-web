@@ -12,7 +12,7 @@ const AttributeInput = ({attribute}: Props) => {
   const attributeValue = useAppSelector(selectAttribute(attribute))
   return (
     <div className='flex flex-col items-center mb-6'>
-      <label className='text-xs mb-2'>{Translator.getAttributeTranslation(attribute)}</label>
+      <label className='text-sm mb-2'>{Translator.getAttributeTranslation(attribute)}</label>
       <div className="flex flex-row">
         <AttributeInputButton 
           side='left'
