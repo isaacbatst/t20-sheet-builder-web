@@ -22,7 +22,6 @@ const SkillGroupSelect = ({skillGroup, setGroupSelectedSkills: setSelectedSkills
           className='mb-3'
           onChange={(newValue) => newValue ? setSelectedSkills([newValue.value]) : setSelectedSkills([])} 
           placeholder={`Opções: ${skillGroup.skills.map(skill => Translator.getSkillTranslation(skill)).join(', ')}`}
-          isSearcheable
           id='skill-group-select'
         />) :
         (     
