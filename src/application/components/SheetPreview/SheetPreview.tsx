@@ -5,6 +5,7 @@ import SheetPreviewSkills from './SheetPreviewSkills'
 import SheetPreviewStats from './SheetPreviewStats'
 import SheetPreviewSpells from './SheetPreviewSpells'
 import SheetPreviewTab from './SheetPreviewTab'
+import SheetPreviewPowers from './SheetPreviewPowers'
 
 const SheetPreview = () => {
 
@@ -15,6 +16,7 @@ const SheetPreview = () => {
           <Tab>Básico</Tab>
           <Tab>Perícias</Tab>
           <Tab>Habilidades</Tab>
+          <Tab>Poderes</Tab>
           <Tab>Magias</Tab>
           <Tab>Passo a passo</Tab>
         </TabList>
@@ -32,6 +34,11 @@ const SheetPreview = () => {
           <TabPanel>
             <SheetPreviewTab>
               <SheetPreviewAbilities />
+            </SheetPreviewTab>
+          </TabPanel>
+          <TabPanel>
+            <SheetPreviewTab>
+              <SheetPreviewPowers />
             </SheetPreviewTab>
           </TabPanel>
           <TabPanel>
