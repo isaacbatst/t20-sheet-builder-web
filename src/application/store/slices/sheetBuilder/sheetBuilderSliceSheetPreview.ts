@@ -35,5 +35,7 @@ export const selectPreviewRoleName = (state: RootState) => state.sheetBuilder.sh
 export const selectPreviewLevel = (state: RootState) => state.sheetBuilder.sheet.preview.level
 export const selectPreviewProficiencies = (state: RootState) => state.sheetBuilder.sheet.preview.proficiencies
 export const selectPreviewSkills = (state: RootState) => state.sheetBuilder.sheet.preview.skills
+export const selectPreviewRaceAbilities = (state: RootState) => state.sheetBuilder.sheet.preview.race?.abilities
+export const selectPreviewRoleAbilities = (state: RootState) => state.sheetBuilder.sheet.preview.role?.abilities
 
 export default sheetBuilderSliceSheetPreview

@@ -1,11 +1,9 @@
-import React from 'react'
-import { SerializedSheetBuildStep } from 't20-sheet-builder'
+import { selectPreviewBuildSteps } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
+import { useSelector } from 'react-redux'
 
-type Props = {
-  buildSteps: SerializedSheetBuildStep[]
-}
+const SheetPreviewBuildSteps = () => {
+  const buildSteps = useSelector(selectPreviewBuildSteps)
 
-const SheetPreviewBuildSteps = ({buildSteps}: Props) => {
   return (
     <div className='flex-1 py-8 md:py-0'>
       <ol className='mx-4'>

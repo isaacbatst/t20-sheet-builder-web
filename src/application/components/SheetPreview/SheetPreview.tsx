@@ -1,12 +1,10 @@
-import { selectPreviewBuildSteps } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
-import { useSelector } from 'react-redux'
-import SheetPreviewBuildSteps from './SheetPreviewBuildSteps'
-import SheetPreviewStats from './SheetPreviewStats'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
+import SheetPreviewAbilities from './SheetPreviewAbilities'
+import SheetPreviewBuildSteps from './SheetPreviewBuildSteps'
 import SheetPreviewSkills from './SheetPreviewSkills'
+import SheetPreviewStats from './SheetPreviewStats'
 
 const SheetPreview = () => {
-  const buildSteps = useSelector(selectPreviewBuildSteps)
 
   return (
     <div className='flex flex-col md:flex-row justify-center py-2'>
@@ -14,17 +12,23 @@ const SheetPreview = () => {
         <TabList>
           <Tab>Básico</Tab>
           <Tab>Perícias</Tab>
+          <Tab>Habilidades</Tab>
           <Tab>Passo a passo</Tab>
         </TabList>
         <TabPanel>
           <SheetPreviewStats />
         </TabPanel>
-        <TabPanel>
-          <SheetPreviewSkills />
-        </TabPanel>
-        <TabPanel>
-          <SheetPreviewBuildSteps buildSteps={buildSteps} />
-        </TabPanel>
+        <div className="container mx-auto">
+          <TabPanel>
+            <SheetPreviewSkills />
+          </TabPanel>
+          <TabPanel>
+            <SheetPreviewAbilities />
+          </TabPanel>
+          <TabPanel>
+            <SheetPreviewBuildSteps />
+          </TabPanel>
+        </div>
       </Tabs>
     </div>
   )
