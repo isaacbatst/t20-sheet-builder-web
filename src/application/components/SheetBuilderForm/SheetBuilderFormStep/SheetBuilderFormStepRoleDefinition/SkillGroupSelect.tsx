@@ -31,7 +31,6 @@ const SkillGroupSelect = ({skillGroup, setGroupSelectedSkills: setSelectedSkills
             options={options}
             placeholder={`Opções: ${skillGroup.skills.map(skill => Translator.getSkillTranslation(skill)).join(', ')}`}
             className='mb-3'
-            isSearcheable
             id='skill-group-select'
           />
         )
