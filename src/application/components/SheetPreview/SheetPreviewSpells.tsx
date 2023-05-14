@@ -2,14 +2,12 @@ import { selectPreviewSpells } from '@/application/store/slices/sheetBuilder/she
 import { useSelector } from 'react-redux'
 import { SpellCircle, Translator } from 't20-sheet-builder'
 
-type Props = {}
-
 const circleToNumber: Record<SpellCircle, number> = {
   [SpellCircle.first]: 1,
   [SpellCircle.second]: 2,
 }
 
-const SheetPreviewSpells = (props: Props) => {
+const SheetPreviewSpells = () => {
   const spells = useSelector(selectPreviewSpells)
 
 
@@ -23,9 +21,11 @@ const SheetPreviewSpells = (props: Props) => {
           const translatedSchool = Translator.getSpellSchoolTranslation(spell.school)
 
           return (
-            <li key={spell.name} className='flex-1 bg-white rounded-md text-slate-950 px-5 py-3 text-left'>
-              <h4 className='font-semibold mb-1 text-lg text-rose-600'>{translatedName}</h4>
-              <p className='text-sm font-medium text-slate-500 mb-2'>{translatedType} {circleNumber} ({translatedSchool})</p>
+            <li key={spell.name} className='bg-white rounded-md text-slate-950 px-5 py-3 text-left'>
+              <h4 className='font-semibold text-lg text-rose-600'>{translatedName}</h4>
+              <h5 className='text-sm font-medium text-slate-500 mb-1'>
+                {translatedType} {circleNumber} ({translatedSchool})
+              </h5>
               <ul className='text-sm'>
                 {spell.effects.map((effect, index) => (
                   <li key={index}>{effect.description}</li>
