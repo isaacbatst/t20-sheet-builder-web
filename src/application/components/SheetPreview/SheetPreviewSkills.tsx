@@ -2,6 +2,7 @@ import { selectPreviewAttributes, selectPreviewSkills } from '@/application/stor
 import { useSelector } from 'react-redux'
 import { SkillName, Translator } from 't20-sheet-builder'
 import SheetPreviewItem from './SheetPreviewValueItem'
+import React from 'react'
 
 const SheetPreviewSkills = () => {
   const skills = useSelector(selectPreviewSkills)
@@ -38,6 +39,13 @@ const SheetPreviewSkills = () => {
               <SheetPreviewItem  
                 label='Treino'
                 value={skill.trainingPoints}
+              />
+            </div>
+            +
+            <div className='flex flex-col'>
+              <SheetPreviewItem  
+                label={'Outros'}
+                value={skill.fixedModifiers.total}
               />
             </div>
           </li>
