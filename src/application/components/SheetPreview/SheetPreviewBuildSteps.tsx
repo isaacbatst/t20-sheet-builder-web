@@ -8,7 +8,6 @@ type Props = {
 const SheetPreviewBuildSteps = ({buildSteps}: Props) => {
   return (
     <div className='flex-1 py-8 md:py-0'>
-      <h3 className='mb-3'>Passo a passo</h3>
       <ol className='mx-4'>
         {buildSteps.map((step, index) => {
           return <li 

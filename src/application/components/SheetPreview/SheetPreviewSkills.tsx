@@ -1,16 +1,14 @@
-import React from 'react'
-import { Attributes, SerializedSheetSkills, SkillName, Translator } from 't20-sheet-builder'
+import { selectPreviewAttributes, selectPreviewSkills } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
+import { useSelector } from 'react-redux'
+import { SkillName, Translator } from 't20-sheet-builder'
 import SheetPreviewItem from './SheetPreviewItem'
 
-type Props = {
-  skills: SerializedSheetSkills
-  attributes: Attributes
-}
+const SheetPreviewSkills = () => {
+  const skills = useSelector(selectPreviewSkills)
+  const attributes = useSelector(selectPreviewAttributes)
 
-const SheetPreviewSkills = ({skills, attributes}: Props) => {
   return (
-    <div className="mb-6 flex flex-col items-center">
-      <p className='mb-3'>Perícias</p>
+    <div className="mb-6 py-2 flex flex-col items-center">
       <ul className='flex flex-col gap-2'>
         {Object.entries(skills)
           .sort(([skill], [skill2]) => {
