@@ -5,11 +5,11 @@ const SheetPreviewBuildSteps = () => {
   const buildSteps = useSelector(selectPreviewBuildSteps)
 
   return (
-    <ol className='mx-4'>
+    <ol>
       {buildSteps.map((step, index) => {
         return <li 
           key={index}
-          className='mb-2 p-5 opacity-95 bg-stone-950 rounded-2xl'>
+          className='mb-2 p-5 opacity-95 bg-stone-900 rounded-2xl'>
           {index+1} - {step.action.description}
         </li>
       })}
