@@ -7,10 +7,12 @@ const SheetPreviewBuildSteps = () => {
   return (
     <ol>
       {buildSteps.map((step, index) => {
+        const [title, ...text] = step.action.description.split(':');
+
         return <li 
           key={index}
-          className='mb-2 p-5 opacity-95 bg-stone-900 rounded-2xl'>
-          {index+1} - {step.action.description}
+          className='mb-2 p-3 opacity-95 rounded-2xl bg-stone-900'>
+          <span className='text-lg font-semibold text-rose-600'>{index+1} - {title}: </span>{text.join('')}
         </li>
       })}
     </ol>
