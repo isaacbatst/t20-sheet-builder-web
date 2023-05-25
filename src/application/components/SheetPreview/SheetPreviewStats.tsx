@@ -1,4 +1,4 @@
-import { selectPreviewAttributes, selectPreviewDefense, selectPreviewLevel, selectPreviewProficiencies, selectPreviewRaceName, selectPreviewRoleName } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
+import { selectPreviewAttributes, selectPreviewDefense, selectPreviewLevel, selectPreviewOriginName, selectPreviewProficiencies, selectPreviewRaceName, selectPreviewRoleName } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
 import { useSelector } from 'react-redux'
 import { Translator } from 't20-sheet-builder'
 import SheetPreviewAttributes from './SheetPreviewAttributes'
@@ -10,21 +10,22 @@ const SheetPreviewStats = () => {
   const defense = useSelector(selectPreviewDefense)
   const raceName = useSelector(selectPreviewRaceName)
   const roleName = useSelector(selectPreviewRoleName)
+  const originName = useSelector(selectPreviewOriginName)
   const level = useSelector(selectPreviewLevel)
   const proficiencies = useSelector(selectPreviewProficiencies)
   
   const getTitle = () => {
-    if(raceName && roleName) {
-      return `${Translator.getRaceTranslation(raceName)} - ${Translator.getRoleTranslation(roleName)}`
-    }
+    const translatedRaceName = raceName && Translator.getRaceTranslation(raceName)
+    const translatedRoleName = roleName && Translator.getRoleTranslation(roleName)
+    const translatedOriginName = originName && Translator.getOriginTranslation(originName)
 
-    if(raceName) {
-      return Translator.getRaceTranslation(raceName)
-    }
-
-    if(roleName) {
-      return Translator.getRoleTranslation(roleName)
-    }
+    const raceText = translatedRaceName ? `${translatedRaceName}` : ''
+    const roleText = translatedRoleName ? `${translatedRoleName}` : ''
+    const originText = translatedOriginName ? `${translatedOriginName}` : ''
+    const texts = [raceText, roleText, originText]
+    return texts
+      .filter(text => text)
+      .join(', ')
   }
 
   return (

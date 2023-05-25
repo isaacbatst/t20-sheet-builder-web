@@ -1,10 +1,12 @@
-import { Acolyte, GeneralPowerFactory, OriginBenefitGeneralPower, OriginBenefitOriginPower, OriginBenefitSkill, OriginPowerFactory } from 't20-sheet-builder'
+import { Acolyte, GeneralPowerFactory, OriginBenefit, OriginBenefitGeneralPower, OriginBenefitOriginPower, OriginBenefitSkill, OriginPowerFactory } from 't20-sheet-builder'
 import ConfirmButton from '../../../ConfirmButton'
 import { OriginComponentType } from '../SheetBuilderFormStepOriginDefinition'
+import { SerializedOriginBenefitsAcolyte } from 't20-sheet-builder/build/domain/entities/Origin/OriginBenefit/SerializedOriginBenefit'
+import { submitOrigin } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceOriginDefinition'
 
 const SheetBuilderFormStepOriginDefinitionAcolyte: OriginComponentType = ({
   benefitsSelect, 
-  // confirmOrigin,
+  confirmOrigin,
   selectedBenefits
 }) => {
   const makeAcolyte = () => {
@@ -19,16 +21,18 @@ const SheetBuilderFormStepOriginDefinitionAcolyte: OriginComponentType = ({
       }
 
       return new OriginBenefitOriginPower(OriginPowerFactory.make({power: benefit.name}))
-    })
+    }) as OriginBenefit<SerializedOriginBenefitsAcolyte>[]
 
     return new Acolyte(originBenefits)
   }
 
-  // createSubmit
+  const createSubmitAction = (acolyte: Acolyte) => {
+    return submitOrigin(acolyte.serialize())
+  }
 
   const confirmAcolyte = () => {
-    console.log('todo', makeAcolyte())
-    // confirmOrigin(makeAcolyte, createSubmit) 
+    // console.log('todo', makeAcolyte())
+    confirmOrigin(makeAcolyte, createSubmitAction) 
   }
   
   return (

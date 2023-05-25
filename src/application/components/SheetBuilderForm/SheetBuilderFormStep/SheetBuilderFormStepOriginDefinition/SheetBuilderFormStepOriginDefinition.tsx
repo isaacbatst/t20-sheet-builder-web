@@ -1,5 +1,5 @@
 import React from 'react'
-import { GeneralPowerName, Origin, OriginBenefits, OriginName, OriginPowerName, Origins, SkillName } from 't20-sheet-builder'
+import { GeneralPowerName, Origin, OriginName, OriginPowerName, Origins, SkillName } from 't20-sheet-builder'
 import { ConfirmFunction, useSheetBuilderConfirm } from '../../useSheetBuilderSubmit'
 import OriginBenefitsSelect from './OriginBenefitsSelect'
 import OriginEquipments from './OriginEquipments'
@@ -38,7 +38,7 @@ const SheetBuilderFormStepOriginDefinition = () => {
   const OriginComponent = origin ? originComponents[origin] : null
   const OriginClass = origin ? Origins.getByName(origin) : null
   const originEquipments = OriginClass ? OriginClass.equipments : null
-  const originBenefits: OriginBenefits | null = OriginClass ? {
+  const originBenefits = OriginClass ? {
     generalPowers: OriginClass.generalPowers,
     skills: OriginClass.skills,
     originPower: OriginClass.originPower

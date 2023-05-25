@@ -1,4 +1,5 @@
-import { Attribute, Attributes, GeneralPowerName, RaceName, RoleName, SerializedArcanist, SkillName } from "t20-sheet-builder"
+import { Attribute, Attributes, GeneralPowerName, OriginName, RaceName, RoleName, SerializedAcolyte, SerializedAnimalsFriend, SerializedArcanist, SkillName } from "t20-sheet-builder"
+import { SerializedOriginBenefit } from "t20-sheet-builder/build/domain/entities/Origin/OriginBenefit/SerializedOriginBenefit"
 
 export interface SheetBuilderStateRaceHumanVersatileChoiceSkill {
   type: 'skill',
@@ -35,3 +36,8 @@ export type SheetBuilderStateRole<T = SheetBuilderStateRoleWarrior | SerializedA
 export type SheetBuilderStateRoleWarrior = {
   name: RoleName.warrior
 }
+
+export type SheetBuilderStateOrigin<T = SerializedAnimalsFriend | SerializedAcolyte> = {
+  name: OriginName,
+  choosenBenefits: SerializedOriginBenefit[]
+} & T

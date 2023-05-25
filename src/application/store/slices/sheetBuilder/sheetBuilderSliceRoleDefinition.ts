@@ -9,7 +9,7 @@ const initialState: SheetBuilderRoleDefinitionState = {
   role: undefined
 }
 
-export const sheetBuilderSliceRaceDefinition = createSlice({
+export const sheetBuilderSliceRoleDefinition = createSlice({
   name: 'sheetBuilder',
   initialState,
   reducers: {
@@ -22,6 +22,6 @@ export const sheetBuilderSliceRaceDefinition = createSlice({
   }
 })
 
-export const { submitRole, resetRole } = sheetBuilderSliceRaceDefinition.actions
+export const { submitRole, resetRole } = sheetBuilderSliceRoleDefinition.actions
 
-export default sheetBuilderSliceRaceDefinition
+export default sheetBuilderSliceRoleDefinition

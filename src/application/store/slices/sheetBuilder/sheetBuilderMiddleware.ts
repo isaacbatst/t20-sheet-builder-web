@@ -1,5 +1,5 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
-import SheetBuilder, { BuildingSheet, Dwarf, Human, OutOfGameContext, RaceInterface, RaceName, RoleFactory, SheetBuilderError, SheetSerializer, VersatileChoiceFactory } from "t20-sheet-builder";
+import SheetBuilder, { BuildingSheet, Dwarf, Human, OriginFactory, OutOfGameContext, RaceInterface, RaceName, RoleFactory, SheetBuilderError, SheetSerializer, VersatileChoiceFactory } from "t20-sheet-builder";
 import { AppStartListening } from "../..";
 import { takeLatest } from "../../sagas";
 import { updatePreview } from "./sheetBuilderSliceSheetPreview";
@@ -29,25 +29,30 @@ startListening({
       api.dispatch(resetFormAlert())
       await takeLatest(api)
 
-      const {initialAttributes, race: {race: serializedRace}, role: {role: serializedRole}} = api.getState().sheetBuilder
+      const {initialAttributes, race: {race: serializedRace}, role: {role: serializedRole}, origin: {origin: serializedOrigin}} = api.getState().sheetBuilder
 
       const sheet = new BuildingSheet()
       const sheetBuilder = new SheetBuilder(sheet)
       const serializer = new SheetSerializer(new OutOfGameContext())
 
-      const raceStep = sheetBuilder
+      sheetBuilder
         .setInitialAttributes(initialAttributes)
 
       if(serializedRace) {
         const race = makeRace(serializedRace)
-        const roleStep = raceStep.chooseRace(race)
-        
-        if(serializedRole) {
-          const role = RoleFactory.makeFromSerialized(serializedRole)
-          roleStep.chooseRole(role)
-        }
+        sheetBuilder.chooseRace(race)
       }
 
+      if(serializedRole) {
+        const role = RoleFactory.makeFromSerialized(serializedRole)
+        sheetBuilder.chooseRole(role)
+      }
+      
+      if (serializedOrigin) {
+        const origin = OriginFactory.makeFromSerialized(serializedOrigin)
+        sheetBuilder.chooseOrigin(origin)
+      }
+      
       api.dispatch(updatePreview(serializer.serialize(sheet)))
 
       const shouldDispatchSuccess = !isAnyOf(

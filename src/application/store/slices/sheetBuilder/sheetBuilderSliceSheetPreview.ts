@@ -32,6 +32,7 @@ export const selectPreviewMaxManaPoints = (state: RootState) => state.sheetBuild
 export const selectPreviewDefense = (state: RootState) => state.sheetBuilder.sheet.preview.defense
 export const selectPreviewRaceName = (state: RootState) => state.sheetBuilder.sheet.preview.race?.name
 export const selectPreviewRoleName = (state: RootState) => state.sheetBuilder.sheet.preview.role?.name
+export const selectPreviewOriginName = (state: RootState) => state.sheetBuilder.sheet.preview.origin?.name
 export const selectPreviewLevel = (state: RootState) => state.sheetBuilder.sheet.preview.level
 export const selectPreviewProficiencies = (state: RootState) => state.sheetBuilder.sheet.preview.proficiencies
 export const selectPreviewSkills = (state: RootState) => state.sheetBuilder.sheet.preview.skills
