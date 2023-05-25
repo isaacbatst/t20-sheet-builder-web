@@ -20,6 +20,7 @@ const SimpleWeaponSelect = ({setSelected}: Props) => {
         onChange={(option) => setSelected(option?.value)}
         className='mb-3'
         id='simple-weapon-select'
+        placeholder='Adaga, clava, espada...'
       />
     </div>
   )

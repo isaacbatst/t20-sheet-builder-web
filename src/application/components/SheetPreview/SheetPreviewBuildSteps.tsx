@@ -5,7 +5,7 @@ const SheetPreviewBuildSteps = () => {
   const buildSteps = useSelector(selectPreviewBuildSteps)
 
   return (
-    <ol>
+    <ol className='flex flex-col'>
       {buildSteps.map((step, index) => {
         const [title, ...text] = step.action.description.split(':');
 
