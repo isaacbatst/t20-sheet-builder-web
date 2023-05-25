@@ -1,3 +1,4 @@
+import { SheetBuilderFormError } from "@/application/common/SheetBuilderFormError"
 import { useAppDispatch } from "@/application/store/hooks"
 import { setFormError } from "@/application/store/slices/sheetBuilder/sheetBuilderSliceForm"
 import { PayloadAction } from "@reduxjs/toolkit"
@@ -20,7 +21,7 @@ export const useSheetBuilderConfirm = <Type, >() => {
       const action = createSubmitAction(entity)
       dispatch(action)
     } catch (err) {
-      if(err instanceof SheetBuilderError) {
+      if(err instanceof SheetBuilderError || err instanceof SheetBuilderFormError) {
         return dispatch(setFormError(err.message))  
       }
 

@@ -1,8 +1,7 @@
-import { Acolyte, GeneralPowerFactory, OriginBenefit, OriginBenefitGeneralPower, OriginBenefitOriginPower, OriginBenefitSkill, OriginPowerFactory } from 't20-sheet-builder'
+import { submitOrigin } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceOriginDefinition'
+import { Acolyte, OriginBenefitFactoryAcolyte, SerializedOriginBenefitsAcolyte } from 't20-sheet-builder'
 import ConfirmButton from '../../../ConfirmButton'
 import { OriginComponentType } from '../SheetBuilderFormStepOriginDefinition'
-import { SerializedOriginBenefitsAcolyte } from 't20-sheet-builder/build/domain/entities/Origin/OriginBenefit/SerializedOriginBenefit'
-import { submitOrigin } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceOriginDefinition'
 
 const SheetBuilderFormStepOriginDefinitionAcolyte: OriginComponentType = ({
   benefitsSelect, 
@@ -10,20 +9,12 @@ const SheetBuilderFormStepOriginDefinitionAcolyte: OriginComponentType = ({
   selectedBenefits
 }) => {
   const makeAcolyte = () => {
-    const originBenefits = selectedBenefits.map(benefit => {
-      if(benefit.type === 'generalPowers'){
-        const power = GeneralPowerFactory.make({name: benefit.name})
-        return new OriginBenefitGeneralPower(power)
-      }
+    const benefitFactory = new OriginBenefitFactoryAcolyte()
+    const benefits = selectedBenefits.map((benefit) => {
+      return benefitFactory.makeFromSerialized(benefit as SerializedOriginBenefitsAcolyte)
+    })
 
-      if(benefit.type === 'skills') {
-        return new OriginBenefitSkill(benefit.name)
-      }
-
-      return new OriginBenefitOriginPower(OriginPowerFactory.make({power: benefit.name}))
-    }) as OriginBenefit<SerializedOriginBenefitsAcolyte>[]
-
-    return new Acolyte(originBenefits)
+    return new Acolyte(benefits)
   }
 
   const createSubmitAction = (acolyte: Acolyte) => {
@@ -31,7 +22,6 @@ const SheetBuilderFormStepOriginDefinitionAcolyte: OriginComponentType = ({
   }
 
   const confirmAcolyte = () => {
-    // console.log('todo', makeAcolyte())
     confirmOrigin(makeAcolyte, createSubmitAction) 
   }
   

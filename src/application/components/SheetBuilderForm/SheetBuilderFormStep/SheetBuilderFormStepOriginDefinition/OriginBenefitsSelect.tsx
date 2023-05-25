@@ -1,15 +1,16 @@
 import { Option } from '@/domain/entities/Option'
-import { OriginBenefits, Translator } from 't20-sheet-builder'
+import { OriginBenefits, SerializedOriginBenefits, Translator } from 't20-sheet-builder'
 import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
-import { SelectedBenefit } from './SheetBuilderFormStepOriginDefinition'
+
+export type OriginBenefitOption = Pick<SerializedOriginBenefits, 'name'| 'type'>
 
 type Props = {
   benefits: OriginBenefits
-  setBenefits(benefits: SelectedBenefit[]): void
+  setBenefits(benefits: OriginBenefitOption[]): void
 }
 
 const OriginBenefitsSelect = ({benefits, setBenefits}: Props) => {
-  const options: Option<SelectedBenefit>[] = []
+  const options: Option<OriginBenefitOption>[] = []
 
   benefits.generalPowers.forEach(power => {
     options.push({
