@@ -22,6 +22,7 @@ const SheetBuilderFormStepIntelligenceSkillsTraining = () => {
             options={options}
             onChange={(options) => setSelectedSkills(options.map(option => option.value))}
             id='intelligence-skills-select'
+            placeholder='Escolha a(s) perícia(s)'
           />
         )
       }
