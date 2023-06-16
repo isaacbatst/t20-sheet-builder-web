@@ -26,6 +26,7 @@ export const sheetBuilderSliceSheetPreview = createSlice({
 export const { updatePreview } = sheetBuilderSliceSheetPreview.actions
 
 export const selectPreviewAttributes = (state: RootState) => state.sheetBuilder.sheet.preview.attributes
+export const selectPreviewDisplacement = (state: RootState) => state.sheetBuilder.sheet.preview.displacement
 export const selectPreviewBuildSteps = (state: RootState) => state.sheetBuilder.sheet.preview.buildSteps
 export const selectPreviewMaxLifePoints = (state: RootState) => state.sheetBuilder.sheet.preview.lifePoints.max
 export const selectPreviewMaxManaPoints = (state: RootState) => state.sheetBuilder.sheet.preview.manaPoints.max

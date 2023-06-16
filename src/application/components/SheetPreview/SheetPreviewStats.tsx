@@ -1,4 +1,4 @@
-import { selectPreviewAttributes, selectPreviewDefense, selectPreviewLevel, selectPreviewOriginName, selectPreviewProficiencies, selectPreviewRaceName, selectPreviewRoleName } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
+import { selectPreviewAttributes, selectPreviewDefense, selectPreviewDisplacement, selectPreviewLevel, selectPreviewOriginName, selectPreviewProficiencies, selectPreviewRaceName, selectPreviewRoleName } from '@/application/store/slices/sheetBuilder/sheetBuilderSliceSheetPreview'
 import { useSelector } from 'react-redux'
 import { Translator } from 't20-sheet-builder'
 import SheetPreviewAttributes from './SheetPreviewAttributes'
@@ -13,6 +13,7 @@ const SheetPreviewStats = () => {
   const originName = useSelector(selectPreviewOriginName)
   const level = useSelector(selectPreviewLevel)
   const proficiencies = useSelector(selectPreviewProficiencies)
+  const displacement = useSelector(selectPreviewDisplacement)
   
   const getTitle = () => {
     const translatedRaceName = raceName && Translator.getRaceTranslation(raceName)
@@ -34,10 +35,13 @@ const SheetPreviewStats = () => {
       <SheetPreviewPoints />
       <SheetPreviewAttributes attributes={attributes} />
       <SheetPreviewDefense defense={defense} attributes={attributes} />
-      <p className='font-light'>
-        <strong className='font-bold'>Proficiências</strong>: {' '}
-        {proficiencies.map(Translator.getProficiencyTranslation).join(', ')}.
-      </p>
+      <div className='flex flex-col'>
+        <p><strong>Deslocamento</strong>: {displacement}m</p>
+        <p className='font-light'>
+          <strong className='font-bold'>Proficiências</strong>: {' '}
+          {proficiencies.map(Translator.getProficiencyTranslation).join(', ')}.
+        </p>
+      </div>
     </div>
   )
 }
