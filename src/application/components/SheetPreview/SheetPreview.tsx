@@ -6,6 +6,7 @@ import SheetPreviewStats from './SheetPreviewStats'
 import SheetPreviewSpells from './SheetPreviewSpells'
 import SheetPreviewTab from './SheetPreviewTab'
 import SheetPreviewPowers from './SheetPreviewPowers'
+import SheetPreviewInventory from './SheetPreviewInventory'
 
 const SheetPreview = () => {
 
@@ -18,6 +19,7 @@ const SheetPreview = () => {
           <Tab>Habilidades</Tab>
           <Tab>Poderes</Tab>
           <Tab>Magias</Tab>
+          <Tab>Inventário</Tab>
           <Tab>Passo a passo</Tab>
         </TabList>
         <div className="container mx-auto">
@@ -44,6 +46,11 @@ const SheetPreview = () => {
           <TabPanel>
             <SheetPreviewTab>
               <SheetPreviewSpells />
+            </SheetPreviewTab>
+          </TabPanel>
+          <TabPanel>
+            <SheetPreviewTab>
+              <SheetPreviewInventory />
             </SheetPreviewTab>
           </TabPanel>
           <TabPanel>

@@ -42,5 +42,6 @@ export const selectPreviewRoleAbilities = (state: RootState) => state.sheetBuild
 export const selectPreviewSpells = (state: RootState) => state.sheetBuilder.sheet.preview.spells
 export const selectPreviewGeneralPowers = (state: RootState) => state.sheetBuilder.sheet.preview.generalPowers
 export const selectPreviewOriginPowers = (state: RootState) => state.sheetBuilder.sheet.preview.originPowers
+export const selectPreviewInventory = (state: RootState) => state.sheetBuilder.sheet.preview.equipments
 
 export default sheetBuilderSliceSheetPreview
