@@ -1,13 +1,13 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
-import SheetBuilder, { BuildingSheet, Dwarf, Human, OriginFactory, OutOfGameContext, RaceInterface, RaceName, RoleFactory, SheetBuilderError, SheetSerializer, VersatileChoiceFactory } from "t20-sheet-builder";
+import SheetBuilder, { BuildingSheet, Dwarf, Human, LeatherArmor, MartialWeaponFactory, OriginFactory, OutOfGameContext, RaceInterface, RaceName, RoleFactory, SheetBuilderError, SheetSerializer, SimpleWeaponFactory, VersatileChoiceFactory } from "t20-sheet-builder";
 import { AppStartListening } from "../..";
 import { takeLatest } from "../../sagas";
-import { updatePreview } from "./sheetBuilderSliceSheetPreview";
-import { SheetBuilderStateRace } from "./types";
 import { resetFormAlert, setFormError, setFormSuccess } from "./sheetBuilderSliceForm";
 import { decrementAttribute, incrementAttribute } from "./sheetBuilderSliceInitialAttributes";
 import { resetRace } from "./sheetBuilderSliceRaceDefinition";
 import { resetRole } from "./sheetBuilderSliceRoleDefinition";
+import { updatePreview } from "./sheetBuilderSliceSheetPreview";
+import { SheetBuilderStateRace } from "./types";
 
 export const sheetBuilderMiddleware = createListenerMiddleware()
 
@@ -29,7 +29,13 @@ startListening({
       api.dispatch(resetFormAlert())
       await takeLatest(api)
 
-      const {initialAttributes, race: {race: serializedRace}, role: {role: serializedRole}, origin: {origin: serializedOrigin}} = api.getState().sheetBuilder
+      const {
+        initialAttributes, 
+        race: {race: serializedRace}, 
+        role: {role: serializedRole}, 
+        origin: {origin: serializedOrigin},
+        initialEquipment: serializedInitialEquipment
+      } = api.getState().sheetBuilder
 
       const sheet = new BuildingSheet()
       const sheetBuilder = new SheetBuilder(sheet)
@@ -51,6 +57,15 @@ startListening({
       if (serializedOrigin) {
         const origin = OriginFactory.makeFromSerialized(serializedOrigin)
         sheetBuilder.chooseOrigin(origin)
+      }
+
+      if(serializedInitialEquipment.simpleWeapon) {
+        sheetBuilder.addInitialEquipment({
+          simpleWeapon: SimpleWeaponFactory.makeFromSerialized(serializedInitialEquipment.simpleWeapon),
+          martialWeapon: serializedInitialEquipment.martialWeapon ? MartialWeaponFactory.makeFromSerialized(serializedInitialEquipment.martialWeapon) : undefined,
+          armor: new LeatherArmor(),
+          money: serializedInitialEquipment.money,  
+        })
       }
       
       api.dispatch(updatePreview(serializer.serialize(sheet)))

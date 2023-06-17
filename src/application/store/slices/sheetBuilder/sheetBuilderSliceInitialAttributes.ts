@@ -14,7 +14,7 @@ const initialState: SheetBuilderInitialAttributesState = {
 }
 
 export const sheetBuilderSliceInitialAttributes = createSlice({
-  name: 'sheetBuilder',
+  name: 'sheetBuilder/initialAttributes',
   initialState,
   reducers: {
     incrementAttribute: (state, action: PayloadAction<Attribute>) => {

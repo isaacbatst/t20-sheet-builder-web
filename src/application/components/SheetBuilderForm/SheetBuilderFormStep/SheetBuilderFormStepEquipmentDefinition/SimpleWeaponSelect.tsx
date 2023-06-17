@@ -1,8 +1,8 @@
-import { EquipmentName, SimpleWeapons, Translator } from 't20-sheet-builder'
+import { SimpleWeaponName, SimpleWeapons, Translator } from 't20-sheet-builder'
 import SheetBuilderFormSelect from '../../SheetBuilderFormSelect'
 
 type Props = {
-  setSelected: (selected?: EquipmentName) => void
+  setSelected: (selected?: SimpleWeaponName) => void
 }
 
 const simpleWeapons = SimpleWeapons.getAll().map(Weapon => ({

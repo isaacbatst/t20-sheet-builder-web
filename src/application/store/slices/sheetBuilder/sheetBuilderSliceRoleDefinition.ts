@@ -10,7 +10,7 @@ const initialState: SheetBuilderRoleDefinitionState = {
 }
 
 export const sheetBuilderSliceRoleDefinition = createSlice({
-  name: 'sheetBuilder',
+  name: 'sheetBuilder/role',
   initialState,
   reducers: {
     resetRole: (state) => {

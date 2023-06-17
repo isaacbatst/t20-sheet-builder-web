@@ -14,7 +14,7 @@ const initialState: SheetBuilderSheetPreviewState = {
 }
 
 export const sheetBuilderSliceSheetPreview = createSlice({
-  name: 'sheetBuilder',
+  name: 'sheetBuilder/preview',
   initialState,
   reducers: {
     updatePreview(state, action: PayloadAction<SerializedSheetInterface>) {

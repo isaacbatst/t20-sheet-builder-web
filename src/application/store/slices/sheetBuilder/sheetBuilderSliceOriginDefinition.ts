@@ -10,7 +10,7 @@ const initialState: SheetBuilderOriginDefinitionState = {
 }
 
 export const sheetBuilderSliceOriginDefinition = createSlice({
-  name: 'sheetBuilder',
+  name: 'sheetBuilder/origin',
   initialState,
   reducers: {
     resetOrigin: (state) => {

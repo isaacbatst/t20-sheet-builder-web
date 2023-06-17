@@ -10,7 +10,7 @@ const initialState: SheetBuilderRaceDefinitionState = {
 }
 
 export const sheetBuilderSliceRaceDefinition = createSlice({
-  name: 'sheetBuilder',
+  name: 'sheetBuilder/race',
   initialState,
   reducers: {
     resetRace: (state) => {
